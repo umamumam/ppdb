@@ -67,4 +67,12 @@ class Ppdb extends Model
 
         return $tahun . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
     }
+    public function dokumenSiswa()
+    {
+        return $this->hasOne(DokumenSiswa::class);
+    }
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class);
+    }
 }

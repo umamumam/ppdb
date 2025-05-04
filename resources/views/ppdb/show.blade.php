@@ -4,15 +4,20 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Detail Pendaftaran PPDB</h5>
-        <div>
-            <a href="{{ route('ppdb.edit', $ppdb->id) }}" class="btn btn-warning btn-sm">
-                <i class="bi bi-pencil"></i> Edit
-            </a>
-            <a href="{{ route('ppdb.index') }}" class="btn btn-secondary btn-sm">
-                <i class="bi bi-arrow-left"></i> Kembali
-            </a>
+    <div class="card-header">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
+            <h5 class="mb-0">Detail Pendaftaran PPDB</h5>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ route('ppdb.upload-dokumen', $ppdb->id) }}" class="btn btn-info btn-sm">
+                    <i class="bi bi-file-earmark-arrow-up"></i> Upload Berkas
+                </a>
+                <a href="{{ route('ppdb.edit', $ppdb->id) }}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-pencil"></i> Edit
+                </a>
+                <a href="{{ route('ppdb.index') }}" class="btn btn-secondary btn-sm">
+                    <i class="bi bi-arrow-left"></i> Kembali
+                </a>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -33,7 +38,7 @@
                     @endif
                     <h4 class="mt-3">{{ $ppdb->nama_siswa }}</h4><br>
                     <span class="badge bg-{{ $ppdb->jenis_pendaftar == 'alumni' ? 'success' : 'primary' }} fs-6">
-                        {{ $ppdb->jenis_pendaftar == 'alumni' ? 'Alumni Mts DAFA' : 'Peserta Didik Baru' }}
+                        {{ $ppdb->jenis_pendaftar == 'alumni' ? 'Naik Tingkat' : 'Peserta Baru' }}
                     </span>
                 </div>
 

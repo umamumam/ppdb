@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UjianController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\DokumenSiswaController;
 use App\Http\Controllers\TahunPelajaranController;
 
 Route::get('/', function () {
@@ -32,7 +34,23 @@ Route::post('/ujian', [UjianController::class, 'store'])->name('ujian.store');
 Route::put('/ujian/{id}', [UjianController::class, 'update'])->name('ujian.update');
 Route::delete('/ujian/{id}', [UjianController::class, 'destroy'])->name('ujian.destroy');
 Route::resource('tahun', TahunPelajaranController::class);
+Route::get('ppdb/search', [PpdbController::class, 'search'])->name('ppdb.search');
 Route::resource('ppdb', PpdbController::class);
 Route::get('/get-alumni-data', [PpdbController::class, 'getAlumniData'])->name('ppdb.getAlumniData');
+Route::post('/ppdb/export', [PpdbController::class, 'export'])->name('ppdb.export');
+Route::post('/ppdb/import', [PpdbController::class, 'import'])->name('ppdb.import');
+Route::get('/ppdb/{ppdb_id}/upload-dokumen', [DokumenSiswaController::class, 'showUploadForm'])->name('ppdb.upload-dokumen');
+Route::post('/ppdb/{ppdb_id}/upload-dokumen', [DokumenSiswaController::class, 'upload'])->name('ppdb.upload-dokumen.submit');
+Route::get('/ppdb/{ppdb_id}/preview-dokumen', [DokumenSiswaController::class, 'previewDokumen'])->name('ppdb.preview-dokumen');
+Route::delete('/ppdb/{ppdb_id}/delete-dokumen/{docType}', [DokumenSiswaController::class, 'deleteDokumen'])->name('ppdb.delete-dokumen');
+// Route::get('ppdb/search', [PpdbController::class, 'search'])->name('ppdb.search');
+Route::prefix('ppdb/{ppdb_id}/pembayaran')->group(function() {
+    Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
+    Route::post('/', [PembayaranController::class, 'store'])->name('pembayaran.store');
+    Route::get('/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
+    Route::put('/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+    Route::delete('/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+});
 
 require __DIR__.'/auth.php';

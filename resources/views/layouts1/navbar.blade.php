@@ -31,7 +31,7 @@
                     </ul>
                 </li>
                 @endif --}}
-                @if(Auth::check() && (Auth::user()->role === 'Admin' || Auth::user()->role === 'Super Admin'))
+                @if(Auth::check() && (Auth::user()->role === 'Super Admin'))
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-list"></i></span>
@@ -47,7 +47,7 @@
                 @endif
 
                 <li class="pc-item pc-caption">
-                    <label>Dafatar Menu</label>
+                    <label>Daftar Menu</label>
                     <i class="ti ti-dashboard"></i>
                 </li>
                 @if(Auth::check() && in_array(Auth::user()->role, ['Admin', 'Super Admin', 'guru']))
@@ -57,7 +57,7 @@
                         <span class="pc-mtext">PPDB</span>
                     </a>
                 </li>
-                <li class="pc-item">
+                {{-- <li class="pc-item">
                     <a href="/gurus" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-school"></i></span>
                         <span class="pc-mtext">Guru</span>
@@ -80,16 +80,16 @@
                         <span class="pc-micon"><i class="ti ti-school"></i></span>
                         <span class="pc-mtext">Biodata Guru</span>
                     </a>
-                </li>
+                </li> --}}
                 @endif
-                @if(Auth::check() && (Auth::user()->role === 'Admin' || Auth::user()->role === 'Super Admin'))
+                {{-- @if(Auth::check() && (Auth::user()->role === 'Admin' || Auth::user()->role === 'Super Admin'))
                 <li class="pc-item">
                     <a href="/penyemak" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-clipboard-list"></i></i></span>
                         <span class="pc-mtext">Penyemak</span>
                     </a>
                 </li>
-                @endif
+                @endif --}}
                 @if(Auth::check() && Auth::user()->role === 'Super Admin')
                 <li class="pc-item">
                     <a href="/users" class="pc-link">

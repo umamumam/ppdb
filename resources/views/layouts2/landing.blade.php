@@ -76,20 +76,11 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
-                            <li class="scroll-to-section"><a href="/alur" class="{{ Request::is('alur') ? 'active' : '' }}">PPDB</a></li>
-                            <li class="scroll-to-section"><a href="/visi" class="{{ Request::is('visi') ? 'active' : '' }}">Tentang</a></li>
-                            {{-- <li class="scroll-to-section dropdown">
-                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                                    Berkas Pendaftaran
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/berkas">PESERTA DIDIK BARU</a></li>
-                                    <li><a class="dropdown-item" href="/naik">PESERTA NAIK TINGKAT</a></li>
-                                </ul>
-                            </li> --}}
-                            <li class="scroll-to-section"><a href="#blog">Akademik</a></li>
-                            <li class="scroll-to-section"><a href="#contact">Program Unggulan</a></li>
-                            <li class="scroll-to-section"><a href="#contact">Kesiswaan</a></li>
+                            <li class="scroll-to-section"><a href="/ppdb/create" class="{{ Request::is('ppdb/create') ? 'active' : '' }}">PPDB</a></li>
+                            <li class="scroll-to-section"><a href="/ppdb/search" class="{{ Request::is('ppdb/search') ? 'active' : '' }}">Bukti Pendaftaran</a></li>
+                            {{-- <li class="scroll-to-section"><a href="#blog">Akademik</a></li> --}}
+                            {{-- <li class="scroll-to-section"><a href="#contact">Program Unggulan</a></li>
+                            <li class="scroll-to-section"><a href="#contact">Kesiswaan</a></li> --}}
                             <li class="scroll-to-section">
                                 <div class="border-first-button"><a href="/login">Login</a></div>
                             </li>

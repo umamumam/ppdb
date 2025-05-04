@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Ppdb;
 use App\Models\Alumni;
+use App\Exports\PpdbExport;
+use App\Imports\PpdbImport;
 use Illuminate\Http\Request;
 use App\Models\TahunPelajaran;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -108,7 +111,6 @@ class PpdbController extends Controller
 
         // return redirect()->route('ppdb.index')->with('success', 'Data PPDB berhasil disimpan');
         return redirect()->route('ppdb.show', $ppdb->id)->with('success', 'Data PPDB berhasil disimpan');
-
     }
 
     public function show(Ppdb $ppdb)
@@ -214,5 +216,32 @@ class PpdbController extends Controller
 
         $alumni = Alumni::where('nisn', $request->nisn)->first();
         return response()->json($alumni);
+    }
+    public function export(Request $request)
+    {
+        $selectedIds = json_decode($request->input('selected'));
+
+        if (empty($selectedIds)) {
+            return back()->with('error', 'Pilih data yang akan diexport');
+        }
+
+        return Excel::download(new PpdbExport($selectedIds), 'ppdb-export.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,xls'
+        ]);
+
+        Excel::import(new PpdbImport, $request->file('file'));
+
+        return back()->with('success', 'Data PPDB berhasil diimport!');
+    }
+
+    public function search(Request $request)
+    {
+        $ppdb = Ppdb::where('nisn', $request->nisn)->first();
+        return view('ppdb.search', compact('ppdb'));
     }
 }

@@ -153,15 +153,15 @@ class AlumniController extends Controller
     //     return Excel::download(new AlumniExport($selectedIds), 'data-alumni-terpilih.xlsx');
     // }
     public function export(Request $request)
-{
-    $selectedIds = json_decode($request->input('selected'));
+    {
+        $selectedIds = json_decode($request->input('selected'));
 
-    if (empty($selectedIds)) {
-        return back()->with('error', 'Pilih data yang akan diexport');
+        if (empty($selectedIds)) {
+            return back()->with('error', 'Pilih data yang akan diexport');
+        }
+
+        return Excel::download(new AlumniExport($selectedIds), 'alumni-export.xlsx');
     }
-
-    return Excel::download(new AlumniExport($selectedIds), 'alumni-export.xlsx');
-}
 
     public function import(Request $request)
     {
