@@ -52,9 +52,9 @@
                 </li>
                 @if(Auth::check() && in_array(Auth::user()->role, ['Admin', 'Super Admin', 'guru']))
                 <li class="pc-item">
-                    <a href="/siswas" class="pc-link">
+                    <a href="/ppdb" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-users"></i></span>
-                        <span class="pc-mtext">Siswa</span>
+                        <span class="pc-mtext">PPDB</span>
                     </a>
                 </li>
                 <li class="pc-item">

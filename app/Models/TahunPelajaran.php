@@ -15,4 +15,8 @@ class TahunPelajaran extends Model
         'tahun',
         'active',
     ];
+    public function ppdbs()
+    {
+        return $this->hasMany(Ppdb::class);
+    }
 }

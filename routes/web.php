@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PpdbController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UjianController;
 use App\Http\Controllers\AlumniController;
@@ -31,4 +32,7 @@ Route::post('/ujian', [UjianController::class, 'store'])->name('ujian.store');
 Route::put('/ujian/{id}', [UjianController::class, 'update'])->name('ujian.update');
 Route::delete('/ujian/{id}', [UjianController::class, 'destroy'])->name('ujian.destroy');
 Route::resource('tahun', TahunPelajaranController::class);
+Route::resource('ppdb', PpdbController::class);
+Route::get('/get-alumni-data', [PpdbController::class, 'getAlumniData'])->name('ppdb.getAlumniData');
+
 require __DIR__.'/auth.php';
