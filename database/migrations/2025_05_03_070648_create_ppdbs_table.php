@@ -47,6 +47,7 @@ return new class extends Migration
             $table->enum('jenis_pendaftar', ['baru', 'alumni'])->default('baru');
             $table->string('no_pendaftaran')->unique();
             $table->foreignId('tahun_pelajaran_id')->constrained();
+            $table->foreignId('petugas_id')->nullable()->constrained('petugas');
             $table->timestamps();
         });
     }

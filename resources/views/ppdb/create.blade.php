@@ -43,7 +43,7 @@
                                 <div class="icon-wrapper mb-3">
                                     <i class="fas fa-user-graduate fa-3x text-success"></i>
                                 </div>
-                                <h3 class="card-title">Alumni MTs DAFA</h3>
+                                <h3 class="card-title">Naik Tingkat</h3>
                                 <p class="text-muted mb-0">Klik untuk memilih</p>
                             </div>
                             <div class="card-footer bg-transparent">
@@ -100,7 +100,17 @@
                     </div>
                     <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Wajib diisi untuk alumni</small>
                 </div>
-
+                <!-- Petugas Field (Tambahan Baru) -->
+                <div class="form-group mt-4">
+                    <label for="petugas_id" class="fw-bold"><i class="fas fa-user-tie me-2"></i>Petugas</label>
+                    <select name="petugas_id" id="petugas_id" class="form-control">
+                        <option value="">-- Pilih Petugas --</option>
+                        @foreach ($petugas as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endforeach
+                    </select>
+                    <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Diisi oleh petugas</small>
+                </div>
                 <div class="form-group mt-4">
                     <label for="no_pendaftaran" class="fw-bold"><i class="fas fa-file-alt me-2"></i>No.
                         Pendaftaran</label>

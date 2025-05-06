@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Ppdb;
+use App\Models\Ujian;
 use App\Models\Alumni;
+use App\Models\Petugas;
 use App\Exports\PpdbExport;
 use App\Imports\PpdbImport;
 use Illuminate\Http\Request;
 use App\Models\TahunPelajaran;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +28,8 @@ class PpdbController extends Controller
     public function create()
     {
         $tahunPelajaran = TahunPelajaran::where('active', true)->first();
-        return view('ppdb.create', compact('tahunPelajaran'));
+        $petugas = Petugas::all();
+        return view('ppdb.create', compact('tahunPelajaran', 'petugas'));
     }
 
     public function store(Request $request)
@@ -57,6 +62,7 @@ class PpdbController extends Controller
             'no_kip' => 'nullable|string|max:20',
             'no_kks' => 'nullable|string|max:20',
             'no_pkh' => 'nullable|string|max:20',
+            'petugas_id' => 'nullable|exists:petugas,id',
         ];
 
         $alumniRules = [
@@ -121,7 +127,8 @@ class PpdbController extends Controller
     public function edit(Ppdb $ppdb)
     {
         $tahunPelajaran = TahunPelajaran::all();
-        return view('ppdb.edit', compact('ppdb', 'tahunPelajaran'));
+        $petugas = Petugas::all();
+        return view('ppdb.edit', compact('ppdb', 'tahunPelajaran', 'petugas'));
     }
 
     public function update(Request $request, Ppdb $ppdb)
@@ -154,6 +161,7 @@ class PpdbController extends Controller
             'no_kip' => 'nullable|string|max:20',
             'no_kks' => 'nullable|string|max:20',
             'no_pkh' => 'nullable|string|max:20',
+            'petugas_id' => 'nullable|exists:petugas,id',
         ];
 
         $alumniRules = [
@@ -243,5 +251,77 @@ class PpdbController extends Controller
     {
         $ppdb = Ppdb::where('nisn', $request->nisn)->first();
         return view('ppdb.search', compact('ppdb'));
+    }
+
+    public function cetak($id)
+    {
+        $ppdb = Ppdb::with('tahunPelajaran')->findOrFail($id);
+        $tanggal = Carbon::now()->translatedFormat('d F Y');
+        $ujian = Ujian::all()->sortBy('tanggal');
+        $photoPath = storage_path('app/public/' . $ppdb->foto);
+        $photoBase64 = null;
+        if ($ppdb->foto && file_exists($photoPath)) {
+            $type = pathinfo($photoPath, PATHINFO_EXTENSION);
+            $data = file_get_contents($photoPath);
+            $photoBase64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+        $pdf = Pdf::loadView('ppdb.kartu', compact('ppdb', 'tanggal', 'ujian', 'photoBase64'))->setPaper('a4');
+        return $pdf->stream('kartu_ppdb.pdf');
+    }
+
+    public function cetakSurat($id)
+    {
+        $ppdb = Ppdb::with('tahunPelajaran', 'petugas')->findOrFail($id);
+        $tanggal = Carbon::now()->translatedFormat('d F Y');
+        $photoPath = storage_path('app/public/' . $ppdb->foto);
+        $photoBase64 = null;
+        if ($ppdb->foto && file_exists($photoPath)) {
+            $type = pathinfo($photoPath, PATHINFO_EXTENSION);
+            $data = file_get_contents($photoPath);
+            $photoBase64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+        $materaiPath = public_path('materai.png');
+        $materaiBase64 = null;
+        if (file_exists($materaiPath)) {
+            $materaiData = file_get_contents($materaiPath);
+            $materaiBase64 = 'data:image/png;base64,' . base64_encode($materaiData);
+        }
+        $template = $ppdb->jenis_pendaftar == 'alumni' ? 'ppdb.naik' : 'ppdb.baru';
+        $pdf = Pdf::loadView($template, [
+            'ppdb' => $ppdb,
+            'tanggal' => $tanggal,
+            'photoBase64' => $photoBase64,
+            'materaiBase64' => $materaiBase64
+        ])->setPaper('a4');
+        $filename = $ppdb->jenis_pendaftar == 'alumni'
+            ? 'surat_naik_' . $ppdb->no_pendaftaran . '.pdf'
+            : 'surat_baru_' . $ppdb->no_pendaftaran . '.pdf';
+        return $pdf->stream($filename);
+    }
+
+    public function cetakBuktiPendaftaran($id)
+    {
+        $ppdb = Ppdb::with('tahunPelajaran')->findOrFail($id);
+        $tanggal = Carbon::now()->translatedFormat('d F Y');
+        $photoBase64 = null;
+        if ($ppdb->foto) {
+            $photoPath = storage_path('app/public/' . $ppdb->foto);
+            if (file_exists($photoPath)) {
+                $photoBase64 = 'data:' . mime_content_type($photoPath) . ';base64,' . base64_encode(file_get_contents($photoPath));
+            }
+        }
+        $kopPath = public_path('kop.png');
+        $kopBase64 = null;
+        if (file_exists($kopPath)) {
+            $kopBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($kopPath));
+        }
+        $pdf = Pdf::loadView('ppdb.bukti_pendaftaran', [
+            'ppdb' => $ppdb,
+            'tanggal' => $tanggal,
+            'photoBase64' => $photoBase64,
+            'kopBase64' => $kopBase64
+        ])->setPaper('a4');
+
+        return $pdf->stream('bukti_pendaftaran_' . $ppdb->no_pendaftaran . '.pdf');
     }
 }

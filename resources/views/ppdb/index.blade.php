@@ -7,16 +7,19 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+                <div
+                    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
                     <h4 class="card-title mb-0">Data Pendaftaran PPDB</h4>
                     <div class="d-flex flex-wrap gap-2">
                         <a href="{{ route('ppdb.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus"></i> Tambah Pendaftaran
                         </a>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#importModal">
                             <i class="fas fa-file-import"></i> Import
                         </button>
-                        <button type="button" class="btn btn-info" id="exportButton" disabled onclick="submitExportForm()">
+                        <button type="button" class="btn btn-info" id="exportButton" disabled
+                            onclick="submitExportForm()">
                             <i class="fas fa-file-export"></i> Export
                         </button>
                     </div>
@@ -103,6 +106,15 @@
                                             class="btn btn-success btn-sm" data-bs-toggle="tooltip"
                                             title="Kelola Pembayaran">
                                             <i class="fas fa-money-bill-wave"></i>
+                                        </a>
+                                        <a href="{{ route('ppdb.cetak', $ppdb->id) }}" class="btn btn-warning btn-sm"
+                                            data-bs-toggle="tooltip" title="Cetak Kartu">
+                                            <i class="fas fa-id-card"></i>
+                                        </a>
+                                        <a href="{{ route('ppdb.cetak-surat', $ppdb->id) }}"
+                                            class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                            title="Cetak Surat Pendaftaran">
+                                            <i class="fas fa-file-pdf"></i>
                                         </a>
                                         <a href="{{ route('ppdb.edit', $ppdb->id) }}" class="btn btn-primary btn-sm"
                                             data-bs-toggle="tooltip" title="Edit">

@@ -43,7 +43,8 @@ class Ppdb extends Model
         'no_pkh',
         'jenis_pendaftar',
         'no_pendaftaran',
-        'tahun_pelajaran_id'
+        'tahun_pelajaran_id',
+        'petugas_id',
     ];
 
     protected $casts = [
@@ -74,5 +75,9 @@ class Ppdb extends Model
     public function pembayarans()
     {
         return $this->hasMany(Pembayaran::class);
+    }
+    public function petugas()
+    {
+        return $this->belongsTo(Petugas::class);
     }
 }

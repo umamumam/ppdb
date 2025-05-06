@@ -5,6 +5,7 @@ use App\Http\Controllers\PpdbController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UjianController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DokumenSiswaController;
@@ -35,6 +36,9 @@ Route::put('/ujian/{id}', [UjianController::class, 'update'])->name('ujian.updat
 Route::delete('/ujian/{id}', [UjianController::class, 'destroy'])->name('ujian.destroy');
 Route::resource('tahun', TahunPelajaranController::class);
 Route::get('ppdb/search', [PpdbController::class, 'search'])->name('ppdb.search');
+Route::get('ppdb/{id}/cetak', [PpdbController::class, 'cetak'])->name('ppdb.cetak');
+Route::get('/ppdb/{id}/cetak-surat', [PpdbController::class, 'cetakSurat'])->name('ppdb.cetak-surat');
+Route::get('/ppdb/{id}/cetak-bukti', [PpdbController::class, 'cetakBuktiPendaftaran'])->name('ppdb.cetak-bukti');
 Route::resource('ppdb', PpdbController::class);
 Route::get('/get-alumni-data', [PpdbController::class, 'getAlumniData'])->name('ppdb.getAlumniData');
 Route::post('/ppdb/export', [PpdbController::class, 'export'])->name('ppdb.export');
@@ -43,7 +47,6 @@ Route::get('/ppdb/{ppdb_id}/upload-dokumen', [DokumenSiswaController::class, 'sh
 Route::post('/ppdb/{ppdb_id}/upload-dokumen', [DokumenSiswaController::class, 'upload'])->name('ppdb.upload-dokumen.submit');
 Route::get('/ppdb/{ppdb_id}/preview-dokumen', [DokumenSiswaController::class, 'previewDokumen'])->name('ppdb.preview-dokumen');
 Route::delete('/ppdb/{ppdb_id}/delete-dokumen/{docType}', [DokumenSiswaController::class, 'deleteDokumen'])->name('ppdb.delete-dokumen');
-// Route::get('ppdb/search', [PpdbController::class, 'search'])->name('ppdb.search');
 Route::prefix('ppdb/{ppdb_id}/pembayaran')->group(function() {
     Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
@@ -52,5 +55,8 @@ Route::prefix('ppdb/{ppdb_id}/pembayaran')->group(function() {
     Route::put('/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
     Route::delete('/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 });
-
+Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index');
+Route::post('/petugas', [PetugasController::class, 'store'])->name('petugas.store');
+Route::put('/petugas/{id}', [PetugasController::class, 'update'])->name('petugas.update');
+Route::delete('/petugas/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
 require __DIR__.'/auth.php';

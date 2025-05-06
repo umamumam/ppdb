@@ -14,7 +14,7 @@
                 <h5>Jenis Pendaftar</h5>
             </div>
             <div class="card-body">
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="card option-card {{ $ppdb->jenis_pendaftar == 'baru' ? 'selected' : '' }}" id="option-baru" style="cursor: pointer;">
                             <div class="card-body text-center">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <input type="hidden" name="jenis_pendaftar" id="jenis_pendaftar" value="{{ $ppdb->jenis_pendaftar }}">
 
@@ -52,7 +52,18 @@
                            {{ $ppdb->jenis_pendaftar == 'alumni' ? 'required' : '' }}>
                     <button type="button" id="cari-alumni" class="btn btn-secondary mt-2">Cari Data Alumni</button>
                 </div>
-
+                <div class="form-group mt-4">
+                    <label for="petugas_id" class="fw-bold"><i class="fas fa-user-tie me-2"></i>Petugas</label>
+                    <select name="petugas_id" id="petugas_id" class="form-control">
+                        <option value="">-- Pilih Petugas --</option>
+                        @foreach ($petugas as $item)
+                            <option value="{{ $item->id }}" {{ $ppdb->petugas_id == $item->id ? 'selected' : '' }}>
+                                {{ $item->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Diisi oleh petugas</small>
+                </div>
                 <div class="form-group mt-3">
                     <label for="no_pendaftaran">No. Pendaftaran</label>
                     <input type="text" class="form-control" value="{{ $ppdb->no_pendaftaran }}" readonly>
@@ -89,7 +100,10 @@
                         <label for="nis">NIS</label>
                         <input type="text" name="nis" id="nis" class="form-control" value="{{ $ppdb->nis }}">
                     </div>
-
+                    <div class="form-group">
+                        <label for="nisn">NISN</label>
+                        <input type="text" name="nisn" id="nisn" class="form-control" value="{{ $ppdb->nisn }}">
+                    </div>
                     <div class="form-group">
                         <label for="nik_siswa">NIK Siswa</label>
                         <input type="text" name="nik_siswa" id="nik_siswa" class="form-control"

@@ -42,6 +42,7 @@
                         <li class="pc-item"><a class="pc-link" href="/ujian">Tanggal Ujian</a></li>
                         <li class="pc-item"><a class="pc-link" href="/tahun">Tahun Pelajaran</a></li>
                         <li class="pc-item"><a class="pc-link" href="/alumnis">Alumni MTs DAFA</a></li>
+                        <li class="pc-item"><a class="pc-link" href="/petugas">Petugas Pendaftaran</a></li>
                     </ul>
                 </li>
                 @endif

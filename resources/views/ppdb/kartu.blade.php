@@ -107,7 +107,7 @@
                             <img src="logo.png" alt="Logo" style="width: 50px;">
                         </td>
                         <td style="text-align: left; vertical-align: middle; border: none;">
-                            <h4 style="margin: 0;">PANITIA PPDB TAHUN PELAJARAN {{ $riwayat->tahunPelajaran->tahun }}</h4>
+                            <h4 style="margin: 0;">PANITIA PPDB TAHUN PELAJARAN {{ $ppdb->tahunPelajaran->tahun }}</h4>
                             <h3 style="margin: 0;">MA DARUL FALAH</h3>
                             <h4 style="margin: 0;">Sirahan Cluwak Pati</h4>
                         </td>
@@ -123,38 +123,45 @@
                     <tr style="border: none;">
                         <td style="width: 15%; vertical-align: top; border: none;"><strong>Nomor</strong></td>
                         <td style="width: 2%; vertical-align: top; border: none;">:</td>
-                        <td style="border: none;">{{ $siswa->no_pendaftaran ?? '-' }}</td>
+                        <td style="border: none;">{{ $ppdb->no_pendaftaran ?? '-' }}</td>
                     </tr>
                     <tr style="border: none;">
                         <td style="vertical-align: top; border: none;"><strong>Nama</strong></td>
                         <td style="vertical-align: top; border: none;">:</td>
-                        <td style="border: none;">{{ $siswa->nama_siswa }}</td>
+                        <td style="border: none;">{{ $ppdb->nama_siswa }}</td>
                     </tr>
                     <tr style="border: none;">
                         <td style="vertical-align: top; border: none;"><strong>Alamat</strong></td>
                         <td style="vertical-align: top; border: none;">:</td>
-                        <td style="border: none;">{{ $siswa->alamat }}</td>
+                        <td style="border: none;">{{ $ppdb->alamat }}</td>
                     </tr>
                 </table>
 
-                @php
-                $path = storage_path('app/public/' . $siswa->foto);
+                {{-- @php
+                $path = storage_path('app/public/' . $ppdb->foto);
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                @endphp
+                @endphp --}}
 
                 <table style="width: 100%; border: none; border-collapse: collapse; margin-top: 10px;">
                     <tr style="border: none;">
                         <td style="width: 50%; border: none; vertical-align: top;">
-                            <img src="{{ $base64 }}" alt="Foto Siswa"
-                                style="width: 3cm; height: 4cm; margin-left:10px;">
+                            @if($photoBase64)
+                                <img src="{{ $photoBase64 }}" alt="Foto Siswa" style="width: 3cm; height: 4cm; margin-left:10px;">
+                            @else
+                                <div style="width: 3cm; height: 4cm; margin-left:10px; border:1px solid #000; display:flex; align-items:center; justify-content:center;">
+                                    Foto Tidak Tersedia
+                                </div>
+                            @endif
                         </td>
                         <td style="border: none; text-align: left; vertical-align: top;">
                             <br>
                             <div style="font-size: 12px;">
                                 Sirahan, {{ $tanggal }}<br>
-                                Ketua Panitia,<br><br><br><br><br>
+                                Ketua Panitia,<br>
+                                <img src="ttd.jpg" alt="Tanda Tangan" style="max-width: 100px; height: auto;">
+                                <br>
                                 <strong>Muhammad Aziz, M.Pd.</strong>
                             </div>
                         </td>
@@ -169,7 +176,7 @@
                 <h4 style="text-align: center;">
                     JADWAL UJIAN KOMPETENSI SISWA BARU <br>
                     MA DARUL FALAH SIRAHAN CLUWAK PATI <br>
-                    TAHUN PELAJARAN 2024/2025
+                    TAHUN PELAJARAN {{ $ppdb->tahunPelajaran->tahun }}
                 </h4>
                 <table>
                     <thead>
@@ -228,7 +235,7 @@
                     * Kartu ini harus dibawa selama ujian seleksi berlangsung. <br>
                     * Apabila kartu ini rusak, hilang atau ketinggalan harus segera melaporkannya kepada panitia ujian.
                 </div>
-                <div style="text-align: right; font-size: 10px; margin-top: 20px;">PPDB MASDAFA {{ $riwayat->tahunPelajaran->tahun }}</div>
+                <div style="text-align: right; font-size: 10px; margin-top: 20px;">PPDB MASDAFA {{ $ppdb->tahunPelajaran->tahun }}</div>
             </td>
         </tr>
     </table>
