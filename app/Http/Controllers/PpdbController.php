@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\TahunPelajaran;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -323,5 +324,58 @@ class PpdbController extends Controller
         ])->setPaper('a4');
 
         return $pdf->stream('bukti_pendaftaran_' . $ppdb->no_pendaftaran . '.pdf');
+    }
+    public function getLaporanPendaftaranSiswa(Request $request)
+    {
+        $tahunPelajaran = TahunPelajaran::where('active', true)->first();
+        if (!$tahunPelajaran) {
+            return redirect()->back()->with('error', 'Tidak ada tahun pelajaran yang aktif');
+        }
+        $data = DB::table('ppdbs')
+            ->select(
+                'nama_siswa',
+                'nisn',
+                'jenis_pendaftar',
+                'asal_sekolah',
+                DB::raw("CASE
+                    WHEN jenis_pendaftar = 'alumni' THEN 'Naik Tingkat'
+                    WHEN jenis_pendaftar = 'baru' THEN 'Peserta Baru'
+                    ELSE 'Lainnya'
+                END as keterangan")
+            )
+            ->where('tahun_pelajaran_id', $tahunPelajaran->id)
+            ->get();
+
+        $totalAlumni = $data->where('jenis_pendaftar', 'alumni')->count();
+        $totalBaru = $data->where('jenis_pendaftar', 'baru')->count();
+        $totalSemua = $data->count();
+        if ($request->has('preview') && $request->preview == 'pdf') {
+            $pdf = Pdf::loadView('ppdb.laporan-pdf', [
+                'data' => $data,
+                'totalAlumni' => $totalAlumni,
+                'totalBaru' => $totalBaru,
+                'totalSemua' => $totalSemua,
+                'tahunPelajaran' => $tahunPelajaran->tahun,
+            ]);
+            return $pdf->stream('preview-laporan-ppdb.pdf');
+        }
+        if ($request->has('export') && $request->export == 'pdf') {
+            $pdf = Pdf::loadView('ppdb.laporan-pdf', [
+                'data' => $data,
+                'totalAlumni' => $totalAlumni,
+                'totalBaru' => $totalBaru,
+                'totalSemua' => $totalSemua,
+                'tahunPelajaran' => $tahunPelajaran->tahun,
+            ]);
+            $filename = 'laporan-ppdb-' . str_replace(['/', '\\', ' '], '-', $tahunPelajaran->tahun) . '.pdf';
+            return $pdf->download($filename);
+        }
+        return view('ppdb.laporan', [
+            'data' => $data,
+            'totalAlumni' => $totalAlumni,
+            'totalBaru' => $totalBaru,
+            'totalSemua' => $totalSemua,
+            'tahunPelajaran' => $tahunPelajaran->tahun,
+        ]);
     }
 }

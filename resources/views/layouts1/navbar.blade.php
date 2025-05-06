@@ -57,6 +57,10 @@
                         <span class="pc-micon"><i class="ti ti-users"></i></span>
                         <span class="pc-mtext">PPDB</span>
                     </a>
+                    <a href="/ppdb/laporan" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-clipboard-list"></i></span>
+                        <span class="pc-mtext">Laporan PPDB</span>
+                    </a>
                 </li>
                 {{-- <li class="pc-item">
                     <a href="/gurus" class="pc-link">

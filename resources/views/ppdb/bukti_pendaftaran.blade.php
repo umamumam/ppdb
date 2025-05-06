@@ -186,7 +186,7 @@
                     bukti pendaftaran ini.
                 </li>
             </ol>
-            <p>Contact Person: 085728129782 a.n. Muhammad Aziz, M.Ag.</p>
+            <p>Contact Person: 085728129782 a.n. Muhammad Aziz, M.Pd.</p>
         </div>
     </div>
 </body>

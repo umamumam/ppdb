@@ -39,6 +39,7 @@ Route::get('ppdb/search', [PpdbController::class, 'search'])->name('ppdb.search'
 Route::get('ppdb/{id}/cetak', [PpdbController::class, 'cetak'])->name('ppdb.cetak');
 Route::get('/ppdb/{id}/cetak-surat', [PpdbController::class, 'cetakSurat'])->name('ppdb.cetak-surat');
 Route::get('/ppdb/{id}/cetak-bukti', [PpdbController::class, 'cetakBuktiPendaftaran'])->name('ppdb.cetak-bukti');
+Route::get('/ppdb/laporan', [PpdbController::class, 'getLaporanPendaftaranSiswa'])->name('ppdb.laporan');
 Route::resource('ppdb', PpdbController::class);
 Route::get('/get-alumni-data', [PpdbController::class, 'getAlumniData'])->name('ppdb.getAlumniData');
 Route::post('/ppdb/export', [PpdbController::class, 'export'])->name('ppdb.export');
