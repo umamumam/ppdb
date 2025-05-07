@@ -12,7 +12,10 @@ class Pembayaran extends Model
     protected $fillable = [
         'ppdb_id',
         'jenis_pembayaran',
-        'nominal',
+        'nominal_spp',
+        'nominal_infaq',
+        'nominal_seragam',
+        'nominal_kolektif',
         'tgl_bayar',
         'status',
         'keterangan'
@@ -20,9 +23,12 @@ class Pembayaran extends Model
     protected $casts = [
         'tgl_bayar' => 'date'
     ];
-    // Relationship with PPDB
     public function ppdb()
     {
         return $this->belongsTo(Ppdb::class);
+    }
+    public function getTotalNominalAttribute()
+    {
+        return $this->nominal_spp + $this->nominal_infaq + $this->nominal_seragam + $this->nominal_kolektif;
     }
 }

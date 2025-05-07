@@ -173,4 +173,23 @@ class AlumniController extends Controller
 
         return back()->with('success', 'Data alumni berhasil diimport!');
     }
+    public function deleteAll(Request $request)
+    {
+        $selectedIds = json_decode($request->selected);
+        if (empty($selectedIds)) {
+            return back()->with('error', 'Tidak ada data yang dipilih untuk dihapus');
+        }
+        try {
+            $alumnis = Alumni::whereIn('id', $selectedIds)->get();
+            foreach ($alumnis as $alumni) {
+                if ($alumni->foto) {
+                    Storage::delete('public/' . $alumni->foto);
+                }
+            }
+            Alumni::whereIn('id', $selectedIds)->delete();
+            return back()->with('success', count($selectedIds) . ' data alumni berhasil dihapus');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+        }
+    }
 }

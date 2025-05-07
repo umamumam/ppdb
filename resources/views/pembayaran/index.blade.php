@@ -2,81 +2,77 @@
 
 @section('content')
 <div class="container">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
-                <h5 class="mb-0" style="color: white">Daftar Pembayaran - {{ $ppdb->nama_siswa }}</h5>
-                <div class="d-flex flex-wrap gap-2">
-                    <a href="{{ route('pembayaran.create', $ppdb->id) }}" class="btn btn-light btn-sm">
-                        <i class="fas fa-plus"></i> Tambah
-                    </a>
-                    <a href="{{ route('ppdb.show', $ppdb->id) }}" class="btn btn-light btn-sm">
-                        <i class="fas fa-arrow-left"></i> Kembali
-                    </a>
-                </div>
-            </div>
-        </div>
+    <h2>Daftar Pembayaran</h2>
+    <a href="{{ route('pembayaran.create', $ppdb->id) }}" class="btn btn-primary mb-3">
+        <i class="fas fa-plus"></i> Tambah Pembayaran
+    </a>
 
+    <div class="card">
         <div class="card-body">
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="bg-light">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Jenis</th>
-                            <th>Nominal</th>
                             <th>Tanggal</th>
+                            <th>Jenis Pembayaran</th>
+                            <th>Nominal</th>
                             <th>Status</th>
-                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($ppdb->pembayarans as $item)
+                        @foreach($ppdb->pembayarans as $pembayaran)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->jenis_pembayaran }}</td>
-                            <td>Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($pembayaran->tgl_bayar)->translatedFormat('d F Y') }}</td>
                             <td>
-                                @if($item->tgl_bayar)
-                                    {{ \Carbon\Carbon::parse($item->tgl_bayar)->translatedFormat('d F Y') }}
-                                @else
-                                    -
+                                @foreach(explode(',', $pembayaran->jenis_pembayaran) as $jenis)
+                                <span class="badge bg-primary me-1">{{ $jenis }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                @if($pembayaran->nominal_spp)
+                                SPP: Rp {{ number_format($pembayaran->nominal_spp) }}<br>
+                                @endif
+                                @if($pembayaran->nominal_infaq)
+                                Infaq: Rp {{ number_format($pembayaran->nominal_infaq) }}<br>
+                                @endif
+                                @if($pembayaran->nominal_seragam)
+                                Seragam: Rp {{ number_format($pembayaran->nominal_seragam) }}<br>
+                                @endif
+                                @if($pembayaran->nominal_kolektif)
+                                Kolektif: Rp {{ number_format($pembayaran->nominal_kolektif) }}
                                 @endif
                             </td>
                             <td>
-                                <span class="badge bg-{{ $item->status == 'Lunas' ? 'success' : 'danger' }}">
-                                    {{ $item->status }}
+                                <span class="badge bg-{{ $pembayaran->status == 'Lunas' ? 'success' : 'warning' }}">
+                                    {{ $pembayaran->status }}
                                 </span>
                             </td>
-                            <td>{{ $item->keterangan ?? '-' }}</td>
                             <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('pembayaran.edit', [$ppdb->id, $item->id]) }}"
-                                       class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('pembayaran.destroy', [$ppdb->id, $item->id]) }}"
-                                          method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Hapus pembayaran ini?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                <a href="{{ route('pembayaran.edit', [$ppdb->id, $pembayaran->id]) }}"
+                                    class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="{{ route('pembayaran.cetak', ['ppdb_id' => $ppdb->id, 'pembayaran_id' => $pembayaran->id, 'preview' => true]) }}"
+                                    class="btn btn-sm btn-info" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> Cetak
+                                </a>
+                                {{-- <a href="{{ route('pembayaran.cetak', ['ppdb_id' => $ppdb->id, 'pembayaran_id' => $pembayaran->id, 'download' => true]) }}"
+                                    class="btn btn-sm btn-primary">
+                                    <i class="fas fa-download"></i> PDF
+                                </a> --}}
+                                <form action="{{ route('pembayaran.destroy', [$ppdb->id, $pembayaran->id]) }}"
+                                    method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Hapus data ini?')">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
-                        @empty
-                        <tr>
-                            <td colspan="7" class="text-center">Belum ada data pembayaran</td>
-                        </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -19,6 +19,9 @@
                         <button type="button" class="btn btn-info" id="exportButton" disabled onclick="submitExportForm()">
                             <i class="fas fa-file-export"></i> Export
                         </button>
+                        <button type="button" class="btn btn-danger" id="deleteAllButton" disabled onclick="confirmDeleteAll()">
+                            <i class="fas fa-trash"></i> Hapus Semua
+                        </button>
                     </div>
                 </div>
                 <hr>
@@ -38,6 +41,11 @@
                 <form id="exportForm" action="{{ route('alumnis.export') }}" method="POST" style="display: none;">
                     @csrf
                     <input type="hidden" name="selected" id="selectedIds">
+                </form>
+                <form id="deleteAllForm" action="{{ route('alumnis.delete-all') }}" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="selected" id="deleteSelectedIds">
                 </form>
                 <div class="table-responsive">
                     <table id="res-config" class="table table-striped table-bordered nowrap" style="width:100%">
@@ -88,21 +96,21 @@
                                 <td>{{ $alumni->program }}</td>
                                 <td>
                                     <div class="d-flex gap-1">
-                                        <a href="{{ route('alumnis.show', $alumni->id) }}" class="btn btn-info btn-sm"
+                                        {{-- <a href="{{ route('alumnis.show', $alumni->id) }}" class="btn btn-info btn-sm"
                                             data-bs-toggle="tooltip" title="Lihat Detail">
                                             <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('alumnis.edit', $alumni->id) }}"
+                                        </a> --}}
+                                        {{-- <a href="{{ route('alumnis.edit', $alumni->id) }}"
                                             class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Edit">
                                             <i class="fas fa-edit"></i>
-                                        </a>
+                                        </a> --}}
                                         <form action="{{ route('alumnis.destroy', $alumni->id) }}" method="POST"
                                             class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger btn-sm delete-button"
                                                 data-id="{{ $alumni->id }}" data-bs-toggle="tooltip" title="Hapus">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-trash"></i> Hapus
                                             </button>
                                         </form>
                                     </div>
@@ -271,6 +279,50 @@
             }
         };
     });
+</script>
+<script>
+    function updateSelectedCheckboxes() {
+        const selected = Array.from(document.querySelectorAll('.export-checkbox:checked')).map(cb => cb.value);
+        document.getElementById('deleteSelectedIds').value = JSON.stringify(selected);
+        document.getElementById('selectedIds').value = JSON.stringify(selected);
+
+        document.getElementById('deleteAllButton').disabled = selected.length === 0;
+        document.getElementById('exportButton').disabled = selected.length === 0;
+    }
+
+    // Checkbox event listener
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkboxes = document.querySelectorAll('.export-checkbox');
+        checkboxes.forEach(cb => cb.addEventListener('change', updateSelectedCheckboxes));
+
+        document.getElementById('select-all').addEventListener('change', function () {
+            const isChecked = this.checked;
+            checkboxes.forEach(cb => cb.checked = isChecked);
+            updateSelectedCheckboxes();
+        });
+    });
+
+    function confirmDeleteAll() {
+        Swal.fire({
+            title: 'Hapus Semua?',
+            text: 'Data alumni yang dipilih akan dihapus permanen!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteAllForm').submit();
+            }
+        });
+    }
+
+    function submitExportForm() {
+        document.getElementById('exportForm').submit();
+    }
 </script>
 
 @endsection

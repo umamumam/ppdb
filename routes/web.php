@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'edit']);
 });
+Route::delete('/alumnis/delete-all', [AlumniController::class, 'deleteAll'])->name('alumnis.delete-all');
 Route::resource('alumnis', \App\Http\Controllers\AlumniController::class);
 Route::post('/alumnis/export', [AlumniController::class, 'export'])->name('alumnis.export');
 Route::post('/alumnis/import', [AlumniController::class, 'import'])->name('alumnis.import');
@@ -48,6 +49,9 @@ Route::get('/ppdb/{ppdb_id}/upload-dokumen', [DokumenSiswaController::class, 'sh
 Route::post('/ppdb/{ppdb_id}/upload-dokumen', [DokumenSiswaController::class, 'upload'])->name('ppdb.upload-dokumen.submit');
 Route::get('/ppdb/{ppdb_id}/preview-dokumen', [DokumenSiswaController::class, 'previewDokumen'])->name('ppdb.preview-dokumen');
 Route::delete('/ppdb/{ppdb_id}/delete-dokumen/{docType}', [DokumenSiswaController::class, 'deleteDokumen'])->name('ppdb.delete-dokumen');
+Route::get('/ppdb/{ppdb_id}/pembayaran/{pembayaran_id}/cetak',
+    [PembayaranController::class, 'cetakKuitansi'])
+    ->name('pembayaran.cetak');
 Route::prefix('ppdb/{ppdb_id}/pembayaran')->group(function() {
     Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
