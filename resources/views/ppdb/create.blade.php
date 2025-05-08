@@ -384,9 +384,9 @@
                         </div>
                         <hr>
                         <div class="form-group mt-4">
-                            <label for="petugas_id">Petugas</label>
+                            <label for="petugas_id">Petugas Pendaftar</label>
                             <select name="petugas_id" id="petugas_id" class="form-control">
-                                <option value="">-- Pilih Petugas --</option>
+                                <option value="">-- Pilih Petugas Pendaftar --</option>
                                 @foreach ($petugas as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
