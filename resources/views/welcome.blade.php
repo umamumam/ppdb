@@ -78,7 +78,7 @@
                             <li class="scroll-to-section"><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
                             <li class="scroll-to-section"><a href="/ppdb/create" class="{{ Request::is('ppdb/create') ? 'active' : '' }}">PPDB</a></li>
                             {{-- <li class="scroll-to-section"><a href="/visi" class="{{ Request::is('visi') ? 'active' : '' }}">Tentang</a></li> --}}
-                            <li class="scroll-to-section"><a href="/ppdb/search" class="{{ Request::is('ppdb/search') ? 'active' : '' }}">Bukti Pendaftaran</a></li>
+                            {{-- <li class="scroll-to-section"><a href="/ppdb/search" class="{{ Request::is('ppdb/search') ? 'active' : '' }}">Bukti Pendaftaran</a></li> --}}
                             {{-- <li class="scroll-to-section"><a href="#contact">Program Unggulan</a></li>
                             <li class="scroll-to-section"><a href="#contact">Kesiswaan</a></li> --}}
                             <li class="scroll-to-section">

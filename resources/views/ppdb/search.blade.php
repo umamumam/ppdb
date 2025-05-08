@@ -90,13 +90,26 @@
                                         </div>
 
                                         <div class="mt-3">
-                                            <a href="{{ route('ppdb.show', $ppdb->id) }}" class="btn btn-primary me-2">
-                                                <i class="fas fa-eye me-1"></i> Lihat Detail
-                                            </a>
-                                            {{-- <a href="{{ route('ppdb.edit', $ppdb->id) }}"
-                                                class="btn btn-outline-secondary">
-                                                <i class="fas fa-edit me-1"></i> Edit
-                                            </a> --}}
+                                            <div class="row g-2">
+                                                <div class="col-12 col-sm-6 col-md-auto">
+                                                    <a href="{{ route('ppdb.show', $ppdb->id) }}"
+                                                        class="btn btn-primary w-100">
+                                                        <i class="fas fa-eye me-1"></i> Lihat Detail
+                                                    </a>
+                                                </div>
+                                                <div class="col-12 col-sm-6 col-md-auto">
+                                                    <a href="{{ route('ppdb.cetak-bukti', $ppdb->id) }}"
+                                                        class="btn btn-danger w-100">
+                                                        <i class="fas fa-print me-1"></i> Cetak
+                                                    </a>
+                                                </div>
+                                                {{--<div class="col-12 col-sm-6 col-md-auto">
+                                                    <a href="{{ route('ppdb.edit', $ppdb->id) }}"
+                                                        class="btn btn-outline-secondary w-100">
+                                                        <i class="fas fa-edit me-1"></i> Edit
+                                                    </a>
+                                                </div>--}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

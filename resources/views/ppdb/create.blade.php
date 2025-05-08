@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Tambah Data PPDB</h1>
+    <h1>Sistim Penerimaan Murid Baru</h1>
 
     <form action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -10,22 +10,21 @@
         <!-- Jenis Pendaftar Selection -->
         <div class="card mb-4">
             <div class="card-header bg-primary text-white">
-                <h5>Pilih Jenis Pendaftar</h5>
+                <h5>Pilih Jenis Layanan</h5>
             </div>
             <div class="card-body">
                 <link rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-                <div class="row">
+                <div class="row" id="selectable-row">
                     <!-- Kolom 1 - Siswa Baru -->
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card option-card h-100" id="option-baru"
-                            style="cursor: pointer; border-left: 4px solid #3490dc;">
+                            style="cursor: pointer; border-left: 4px solid #3490dc;" onclick="hideParentRow(this)">
                             <div class="card-body text-center p-4">
                                 <div class="icon-wrapper mb-3">
                                     <i class="fas fa-user-plus fa-3x text-primary"></i>
                                 </div>
-                                <h3 class="card-title">Siswa Baru</h3>
+                                <h3 class="card-title">Murid Baru</h3>
                                 <p class="text-muted mb-0">Klik untuk memilih</p>
                             </div>
                             <div class="card-footer bg-transparent">
@@ -36,9 +35,9 @@
                     </div>
 
                     <!-- Kolom 2 - Alumni MTs -->
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card option-card h-100" id="option-alumni"
-                            style="cursor: pointer; border-left: 4px solid #38c172;">
+                            style="cursor: pointer; border-left: 4px solid #38c172;" onclick="hideParentRow(this)">
                             <div class="card-body text-center p-4">
                                 <div class="icon-wrapper mb-3">
                                     <i class="fas fa-user-graduate fa-3x text-success"></i>
@@ -54,7 +53,28 @@
                     </div>
 
                     <!-- Kolom 3 - Informasi -->
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
+                        <a href="/ppdb/search" class="text-decoration-none">
+                            <div class="card h-100 bg-light" style="cursor: pointer; transition: all 0.3s ease;">
+                                <div class="card-body p-4">
+                                    <h4 class="card-title text-center mb-3">
+                                        <i class="fas fa-file-alt text-primary me-2"></i>Bukti Pendaftaran
+                                    </h4>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-search text-info me-2"></i> Cari bukti pendaftaran</li>
+                                        <li class="mb-2"><i class="fas fa-download text-info me-2"></i> Unduh bukti pendaftaran</li>
+                                        <li class="mb-2"><i class="fas fa-print text-info me-2"></i> Cetak bukti pendaftaran</li>
+                                    </ul>
+                                    <div class="alert alert-primary mt-3">
+                                        <small><i class="fas fa-external-link-alt me-2"></i> Klik untuk mencari bukti pendaftaran</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Kolom 4 - Informasi -->
+                    <div class="col-md-3 mb-4">
                         <div class="card h-100 bg-light">
                             <div class="card-body p-4">
                                 <h4 class="card-title text-center mb-3"><i
@@ -75,7 +95,16 @@
                         </div>
                     </div>
                 </div>
-
+                <script>
+                    function hideParentRow(element) {
+                            const row = document.getElementById('selectable-row');
+                            row.style.transition = "opacity 0.3s ease";
+                            row.style.opacity = "0";
+                            setTimeout(function() {
+                                row.style.display = "none";
+                            }, 300);
+                        }
+                </script>
                 <input type="hidden" name="jenis_pendaftar" id="jenis_pendaftar" value="">
 
                 <!-- NISN Field for New Students -->
@@ -99,17 +128,6 @@
                         </button>
                     </div>
                     <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Wajib diisi untuk alumni</small>
-                </div>
-                <!-- Petugas Field (Tambahan Baru) -->
-                <div class="form-group mt-4">
-                    <label for="petugas_id" class="fw-bold"><i class="fas fa-user-tie me-2"></i>Petugas</label>
-                    <select name="petugas_id" id="petugas_id" class="form-control">
-                        <option value="">-- Pilih Petugas --</option>
-                        @foreach ($petugas as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                        @endforeach
-                    </select>
-                    <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Diisi oleh petugas</small>
                 </div>
                 <div class="form-group mt-4">
                     <label for="no_pendaftaran" class="fw-bold"><i class="fas fa-file-alt me-2"></i>No.
@@ -364,10 +382,20 @@
                             <label for="no_pkh">No. PKH</label>
                             <input type="text" name="no_pkh" id="no_pkh" class="form-control">
                         </div>
+                        <hr>
+                        <div class="form-group mt-4">
+                            <label for="petugas_id">Petugas</label>
+                            <select name="petugas_id" id="petugas_id" class="form-control">
+                                <option value="">-- Pilih Petugas --</option>
+                                @foreach ($petugas as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Diisi oleh petugas</small> --}}
+                        </div>
                     </div>
                 </div>
             </div>
-
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary btn-lg">Simpan Data</button>
                 <a href="{{ route('ppdb.index') }}" class="btn btn-secondary btn-lg ml-2">Kembali</a>
