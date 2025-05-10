@@ -182,15 +182,15 @@
                     <div class="row">
                         <!-- Kolom Kiri -->
 
-                        <div class="col-md-4 mb-2">
+                        {{-- <div class="col-md-4 mb-2">
                             <label for="nis" class="form-label">NIS</label>
                             <input type="text" class="form-control" id="nis" name="nis">
-                        </div>
-                        <div class="col-md-4 mb-2">
+                        </div> --}}
+                        <div class="col-md-6 mb-2">
                             <label for="nisn" class="form-label">NISN</label>
                             <input type="text" class="form-control" id="nisn" name="nisn">
                         </div>
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-6 mb-2">
                             <label for="nik_siswa" class="form-label">NIK Siswa</label>
                             <input type="text" class="form-control" id="nik_siswa" name="nik_siswa">
                         </div>
@@ -444,9 +444,9 @@
 
         // Show appropriate NISN field
         if (option === 'baru') {
-            document.getElementById('nisn-baru-field').style.display = 'block';
+            document.getElementById('nisn-baru-field').style.display = 'none';
             document.getElementById('alumni-field').style.display = 'none';
-            document.getElementById('nisn_baru').required = true;
+            document.getElementById('nisn_baru').required = false;
             document.getElementById('nisn_alumni').required = false;
         } else if (option === 'alumni') {
             document.getElementById('nisn-baru-field').style.display = 'none';
