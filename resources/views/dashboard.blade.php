@@ -26,35 +26,35 @@
         <div class="col-md-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Peserta Naik Tingkat</h6>
+                    <h6 class="mb-2 f-w-400 text-muted">Total Murid Naik Tingkat</h6>
                     <h3 class="mb-3">
                         {{ $naikTingkat }}
                         <span class="badge bg-light-primary border border-primary"><i class="ti ti-school"></i></span>
                     </h3>
-                    <p class="mb-0 text-muted text-sm">Peserta MTs yang melanjutkan</p>
+                    <p class="mb-0 text-muted text-sm">Murid MTs Dafa yang melanjutkan</p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Peserta Baru</h6>
+                    <h6 class="mb-2 f-w-400 text-muted">Total Murid Baru</h6>
                     <h3 class="mb-3">
                         {{ $pesertaBaru }}
                         <span class="badge bg-light-success border border-success"><i class="ti ti-users"></i></span>
                     </h3>
-                    <p class="mb-0 text-muted text-sm">Peserta baru mendaftar tahun ini</p>
+                    <p class="mb-0 text-muted text-sm">Murid baru mendaftar tahun ini</p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Alumni</h6>
+                    <h6 class="mb-2 f-w-400 text-muted">Total Alumni MTs Dafa</h6>
                     <h3 class="mb-3">{{ $totalAlumni }}
                         <span class="badge bg-light-warning border border-warning"><i
                                 class="ti ti-user-check"></i></span></h3>
-                    <p class="mb-0 text-muted text-sm">Total alumni yang terdaftar</p>
+                    <p class="mb-0 text-muted text-sm">Total alumni MTs Dafa yang terdaftar</p>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
         </div>
     </div>
     <div class="col-md-12 col-xl-8">
-        <h5 class="mb-3">Grafik PPDB</h5>
+        <h5 class="mb-3">Grafik SPMB</h5>
         <div class="card">
             <div class="card-body">
                 <h6 class="mb-2 f-w-400 text-muted">Statistik Pendaftar</h6>
@@ -141,7 +141,7 @@
                                 ]
                             }],
                             xaxis: {
-                                categories: ['Naik Tingkat', 'Peserta Baru', 'Alumni']
+                                categories: ['Naik Tingkat', 'Murid Baru', 'Alumni MTs Dafa']
                             },
                             tooltip: {
                                 y: {
@@ -191,7 +191,7 @@
         </div>
     </div> --}}
     <div class="col-md-12 col-xl-4">
-        <h5 class="mb-3">Statistik PPDB</h5>
+        <h5 class="mb-3">Statistik SPMB</h5>
         <div class="card">
             <div class="card-body">
                 <h6 class="mb-2 f-w-400 text-muted">Total Pendaftar</h6>
@@ -231,7 +231,7 @@
                                 {{ $pesertaBaru }},
                                 {{ $totalAlumni }}
                             ],
-                            labels: ['Naik Tingkat', 'Peserta Baru', 'Alumni'],
+                            labels: ['Naik Tingkat', 'Murid Baru', 'Alumni MTs Dafa'],
                             tooltip: {
                                 y: {
                                     formatter: function (val) {

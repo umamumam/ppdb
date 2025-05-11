@@ -106,7 +106,7 @@
                                 data-wow-delay="1s">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h6>Welcome</h6>
+                                        <h6>Selamat Datang</h6>
                                         <h2>MADRASAH ALIYAH DARUL FALAH</h2>
                                         <span style="display: block; text-align: justify;"><b>MA Darul Falah</b> merupakan salah satu unit
                                             pelaksanaan teknis dibidang
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="border-first-button scroll-to-section">
-                                            <a href="#">Explore</a>
+                                            <a href="#">Selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>

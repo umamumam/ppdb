@@ -106,7 +106,7 @@
                                 data-wow-delay="1s">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h6>Welcome</h6>
+                                        <h6>SELAMAT DATANG</h6>
                                         <h2>MADRASAH ALIYAH DARUL FALAH</h2>
                                         <p style="text-align: justify;"><b>MA Darul Falah</b> merupakan salah satu unit pelaksanaan teknis dibidang
                                             pendidikan berazazkan islami ikut serta dalam mengemban tugas dalam

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Laporan PPDB</title>
+    <title>Laporan SPMB</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,7 +68,7 @@
 </head>
 <body>
     <div class="header">
-        <h3>LAPORAN PENERIMAAN PESERTA DIDIK BARU</h3>
+        <h3>LAPORAN SISTEM PENERIMAAN MURID BARU</h3>
         <h4>MA DARUL FALAH SIRAHAN CLUWAK PATI</h4>
         <h5>TAHUN PELAJARAN: {{ $tahunPelajaran }}</h5>
     </div>

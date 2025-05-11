@@ -97,7 +97,7 @@
 
 <body>
     <div class="container mt-4">
-        <h3 class="text-center mb-4">FORMULIR PESERTA DIDIK BARU</h3>
+        <h3 class="text-center mb-4">FORMULIR MURID BARU</h3>
 
         <table class="table table-sm table-borderless mb-4 mt-5">
             <tr>

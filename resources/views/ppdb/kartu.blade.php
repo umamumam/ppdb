@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kartu Ujian MA Darul Falah</title>
+    <title>Kartu Ujian Kompetensi Masuk</title>
     <style>
         @page {
             size: A4;

@@ -47,7 +47,7 @@
                 <!-- NISN Field for Alumni -->
                 <div id="alumni-field" class="form-group" style="display: {{ $ppdb->jenis_pendaftar == 'alumni' ? 'block' : 'none' }};">
                     <label for="nisn_alumni">NISN Alumni</label>
-                    <input type="text" name="nisn" id="nisn_alumni" class="form-control" placeholder="Masukkan NISN Alumni"
+                    <input type="text" name="nisn" id="nisn_alumni" class="form-control" placeholder="Masukkan NISN Alumni MTs DAFA"
                            value="{{ $ppdb->jenis_pendaftar == 'alumni' ? $ppdb->nisn : '' }}"
                            {{ $ppdb->jenis_pendaftar == 'alumni' ? 'required' : '' }}>
                     <button type="button" id="cari-alumni" class="btn btn-secondary mt-2">Cari Data Alumni</button>
