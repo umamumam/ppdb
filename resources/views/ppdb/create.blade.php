@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Sistim Penerimaan Murid Baru</h1>
+    <h1>Sistem Penerimaan Murid Baru</h1>
 
     <form action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -10,7 +10,7 @@
         <!-- Jenis Pendaftar Selection -->
         <div class="card mb-4">
             <div class="card-header bg-primary text-white">
-                <h5>Pilih Jenis Layanan</h5>
+                <h5>Input Data</h5>
             </div>
             <div class="card-body">
                 <link rel="stylesheet"
@@ -122,7 +122,7 @@
                         Nasional) *</label>
                     <div class="input-group">
                         <input type="text" name="nisn" id="nisn_alumni" class="form-control"
-                            placeholder="Masukkan NISN Alumni">
+                            placeholder="Masukkan NISN Alumni MTs DAFA">
                         <button type="button" id="cari-alumni" class="btn btn-secondary">
                             <i class="fas fa-search me-1"></i>Cari Data
                         </button>
