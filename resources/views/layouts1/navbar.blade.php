@@ -41,7 +41,7 @@
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="/ujian">Tanggal Ujian</a></li>
                         <li class="pc-item"><a class="pc-link" href="/tahun">Tahun Pelajaran</a></li>
-                        <li class="pc-item"><a class="pc-link" href="/alumnis">Alumni MTs DAFA</a></li>
+                        {{-- <li class="pc-item"><a class="pc-link" href="/alumnis">Alumni MTs DAFA</a></li> --}}
                         <li class="pc-item"><a class="pc-link" href="/petugas">Petugas Pendaftaran</a></li>
                     </ul>
                 </li>
@@ -53,10 +53,18 @@
                 </li>
                 @if(Auth::check() && in_array(Auth::user()->role, ['Admin', 'Super Admin', 'guru']))
                 <li class="pc-item">
+                    <a href="/alumnis" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-school"></i></span>
+                        <span class="pc-mtext">Alumni MTs DAFA</span>
+                    </a>
+                </li>
+                <li class="pc-item">
                     <a href="/ppdb" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-users"></i></span>
                         <span class="pc-mtext">PPDB</span>
                     </a>
+                </li>
+                <li class="pc-item">
                     <a href="/ppdb/laporan" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-clipboard-list"></i></span>
                         <span class="pc-mtext">Laporan PPDB</span>
