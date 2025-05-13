@@ -86,7 +86,7 @@
                                 <td>
                                     <span
                                         class="badge bg-{{ $ppdb->jenis_pendaftar == 'baru' ? 'primary' : 'secondary' }}">
-                                        {{ $ppdb->jenis_pendaftar }}
+                                        {{ $ppdb->jenis_pendaftar == 'baru' ? 'Murid Baru' : 'Naik Tingkat' }}
                                     </span>
                                 </td>
                                 <td>{{ $ppdb->tahunPelajaran->tahun ?? '-' }}</td>
@@ -108,12 +108,12 @@
                                             <i class="fas fa-money-bill-wave"></i>
                                         </a>
                                         <a href="{{ route('ppdb.cetak', $ppdb->id) }}" class="btn btn-warning btn-sm"
-                                            data-bs-toggle="tooltip" title="Cetak Kartu">
+                                            data-bs-toggle="tooltip" title="Cetak Kartu" target="_blank">
                                             <i class="fas fa-id-card"></i>
                                         </a>
                                         <a href="{{ route('ppdb.cetak-surat', $ppdb->id) }}"
                                             class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                            title="Cetak Surat Pendaftaran">
+                                            title="Cetak Surat Pendaftaran" target="_blank">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
                                         <a href="{{ route('ppdb.edit', $ppdb->id) }}" class="btn btn-primary btn-sm"

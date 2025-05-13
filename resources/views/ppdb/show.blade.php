@@ -11,7 +11,7 @@
                 <a href="{{ route('ppdb.upload-dokumen', $ppdb->id) }}" class="btn btn-info btn-sm">
                     <i class="bi bi-file-earmark-arrow-up"></i> Upload Berkas
                 </a>
-                <a href="{{ route('ppdb.cetak-bukti', $ppdb->id) }}" class="btn btn-primary btn-sm">
+                <a href="{{ route('ppdb.cetak-bukti', $ppdb->id) }}" class="btn btn-primary btn-sm" target="_blank">
                     <i class="bi bi-file-earmark-arrow-up"></i> Cetak Bukti Pendaftaran
                 </a>
                 <a href="{{ route('ppdb.edit', $ppdb->id) }}" class="btn btn-warning btn-sm">
