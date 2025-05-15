@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label"><i class="bi bi-calendar-date me-2"></i>TTL</label>
+                                    <label class="form-label"><i class="bi bi-calendar-date me-2"></i>Tempat, Tgl. Lahir</label>
                                     <div class="form-control bg-light">
                                         {{ $ppdb->tempat_lahir }}, {{ $ppdb->tgl_lahir ?
                                         $ppdb->tgl_lahir->format('d-m-Y') : '' }}
