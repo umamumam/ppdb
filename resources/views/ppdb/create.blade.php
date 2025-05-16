@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <h1>Sistem Penerimaan Murid Baru</h1>
 
     <form action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data">
@@ -61,12 +70,16 @@
                                         <i class="fas fa-file-alt text-primary me-2"></i>Bukti Pendaftaran
                                     </h4>
                                     <ul class="list-unstyled">
-                                        <li class="mb-2"><i class="fas fa-search text-info me-2"></i> Cari bukti pendaftaran</li>
-                                        <li class="mb-2"><i class="fas fa-download text-info me-2"></i> Unduh bukti pendaftaran</li>
-                                        <li class="mb-2"><i class="fas fa-print text-info me-2"></i> Cetak bukti pendaftaran</li>
+                                        <li class="mb-2"><i class="fas fa-search text-info me-2"></i> Cari bukti
+                                            pendaftaran</li>
+                                        <li class="mb-2"><i class="fas fa-download text-info me-2"></i> Unduh bukti
+                                            pendaftaran</li>
+                                        <li class="mb-2"><i class="fas fa-print text-info me-2"></i> Cetak bukti
+                                            pendaftaran</li>
                                     </ul>
                                     <div class="alert alert-primary mt-3">
-                                        <small><i class="fas fa-external-link-alt me-2"></i> Klik untuk mencari bukti pendaftaran</small>
+                                        <small><i class="fas fa-external-link-alt me-2"></i> Klik untuk mencari bukti
+                                            pendaftaran</small>
                                     </div>
                                 </div>
                             </div>
@@ -391,7 +404,8 @@
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
-                            {{-- <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Diisi oleh petugas</small> --}}
+                            {{-- <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Diisi oleh
+                                petugas</small> --}}
                         </div>
                     </div>
                 </div>

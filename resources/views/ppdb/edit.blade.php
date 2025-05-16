@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <h1>Edit Data Pendaftaran Murid Baru</h1>
 
     <form action="{{ route('ppdb.update', $ppdb->id) }}" method="POST" enctype="multipart/form-data">
