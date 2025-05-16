@@ -2,13 +2,22 @@
 
 namespace App\Imports;
 
-use App\Models\Ppdb;
-use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Carbon\Carbon;
+use App\Models\Ppdb;
+use App\Models\TahunPelajaran;
+use Maatwebsite\Excel\Concerns\ToModel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class PpdbImport implements ToModel, WithHeadingRow
 {
+    protected $tahunPelajaranId;
+
+    public function __construct($tahunPelajaranId = null)
+    {
+        $this->tahunPelajaranId = $tahunPelajaranId ?? 1; // Default tahun pelajaran
+    }
+
     public function model(array $row)
     {
         // Cek apakah data sudah ada berdasarkan no_pendaftaran
@@ -21,9 +30,9 @@ class PpdbImport implements ToModel, WithHeadingRow
                 'nisn' => $row['nisn'] ?? null,
                 'nik_siswa' => $row['nik_siswa'] ?? null,
                 'nama_siswa' => $row['nama_siswa'] ?? null,
-                'jeniskelamin' => $row['jenis_kelamin'] ?? null,
+                'jeniskelamin' => $row['jeniskelamin'] ?? null,
                 'tempat_lahir' => $row['tempat_lahir'] ?? null,
-                'tgl_lahir' => isset($row['tanggal_lahir']) ? Carbon::parse($row['tanggal_lahir']) : null,
+                'tgl_lahir' => $this->parseDate($row['tanggal_lahir'] ?? null),
                 'kelas' => $row['kelas'] ?? null,
                 'program' => $row['program'] ?? null,
                 'anak_ke' => $row['anak_ke'] ?? null,
@@ -48,7 +57,7 @@ class PpdbImport implements ToModel, WithHeadingRow
                 'no_kks' => $row['no_kks'] ?? null,
                 'no_pkh' => $row['no_pkh'] ?? null,
                 'jenis_pendaftar' => $row['jenis_pendaftar'] ?? 'baru',
-                'tahun_pelajaran_id' => $row['tahun_pelajaran_id'] ?? 1 // Default tahun pelajaran
+                'tahun_pelajaran_id' => $row['tahun_pelajaran_id'] ?? $this->tahunPelajaranId
             ]);
 
             return null; // Karena kita melakukan update, return null untuk skip pembuatan baru
@@ -56,14 +65,14 @@ class PpdbImport implements ToModel, WithHeadingRow
 
         // Jika tidak ada, buat data baru
         return new Ppdb([
-            'no_pendaftaran' => $row['no_pendaftaran'] ?? $this->generateNoPendaftaran(),
+            'no_pendaftaran' => $row['no_pendaftaran'] ?? $this->generateNoPendaftaran($row['tahun_pelajaran_id'] ?? $this->tahunPelajaranId),
             'nis' => $row['nis'] ?? null,
             'nisn' => $row['nisn'] ?? null,
             'nik_siswa' => $row['nik_siswa'] ?? null,
             'nama_siswa' => $row['nama_siswa'] ?? null,
-            'jeniskelamin' => $row['jenis_kelamin'] ?? null,
+            'jeniskelamin' => $row['jeniskelamin'] ?? null,
             'tempat_lahir' => $row['tempat_lahir'] ?? null,
-            'tgl_lahir' => isset($row['tanggal_lahir']) ? Carbon::parse($row['tanggal_lahir']) : null,
+            'tgl_lahir' => $this->parseDate($row['tanggal_lahir'] ?? null),
             'kelas' => $row['kelas'] ?? null,
             'program' => $row['program'] ?? null,
             'anak_ke' => $row['anak_ke'] ?? null,
@@ -88,17 +97,45 @@ class PpdbImport implements ToModel, WithHeadingRow
             'no_kks' => $row['no_kks'] ?? null,
             'no_pkh' => $row['no_pkh'] ?? null,
             'jenis_pendaftar' => $row['jenis_pendaftar'] ?? 'baru',
-            'tahun_pelajaran_id' => $row['tahun_pelajaran_id'] ?? 1 // Default tahun pelajaran
+            'tahun_pelajaran_id' => $row['tahun_pelajaran_id'] ?? $this->tahunPelajaranId
         ]);
     }
 
-    private function generateNoPendaftaran()
+    private function generateNoPendaftaran($tahunPelajaranId)
     {
-        // Logika generate nomor pendaftaran
-        $tahun = date('Y');
-        $lastPpdb = Ppdb::orderBy('id', 'desc')->first();
-        $lastId = $lastPpdb ? $lastPpdb->id + 1 : 1;
+        $tahunPelajaran = TahunPelajaran::find($tahunPelajaranId);
 
-        return 'PPDB-' . $tahun . '-' . str_pad($lastId, 5, '0', STR_PAD_LEFT);
+        if (!$tahunPelajaran) {
+            throw new \Exception("Tahun pelajaran tidak ditemukan");
+        }
+
+        $tahunAjaran = $tahunPelajaran->tahun;
+        $tahunParts = explode('/', $tahunAjaran);
+        $tahun = substr($tahunParts[0], -2);
+
+        $lastNumber = Ppdb::where('tahun_pelajaran_id', $tahunPelajaranId)
+            ->orderBy('no_pendaftaran', 'desc')
+            ->first();
+
+        $nextNumber = $lastNumber ? (int)substr($lastNumber->no_pendaftaran, 2) + 1 : 1;
+
+        return $tahun . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+    }
+
+    private function parseDate($value)
+    {
+        if (empty($value)) return null;
+
+        try {
+            if (is_numeric($value)) {
+                return Carbon::instance(Date::excelToDateTimeObject($value))->format('Y-m-d');
+            }
+            if (preg_match('/^\d{2}-\d{2}-\d{4}$/', $value)) {
+                return Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
+            }
+            return Carbon::parse($value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }

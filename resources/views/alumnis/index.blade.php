@@ -55,7 +55,7 @@
                                     <input type="checkbox" id="select-all">
                                 </th>
                                 <th>Foto</th>
-                                <th>NIS</th>
+                                <th>NISN</th>
                                 <th>Nama</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Kelas</th>
@@ -84,7 +84,7 @@
                                     </div>
                                     @endif
                                 </td>
-                                <td>{{ $alumni->nis }}</td>
+                                <td>{{ $alumni->nisn }}</td>
                                 <td>{{ $alumni->nama_siswa }}</td>
                                 <td>
                                     <span
@@ -121,9 +121,6 @@
                     </table>
                 </div>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $alumnis->links() }}
-                </div>
             </div>
         </div>
     </div>

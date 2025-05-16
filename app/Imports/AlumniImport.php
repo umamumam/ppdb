@@ -2,8 +2,10 @@
 
 namespace App\Imports;
 
+use Carbon\Carbon;
 use App\Models\Alumni;
 use Maatwebsite\Excel\Concerns\ToModel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class AlumniImport implements ToModel, WithHeadingRow
@@ -27,7 +29,8 @@ class AlumniImport implements ToModel, WithHeadingRow
             'foto'             => $row['foto'] ?? null,
             'jeniskelamin'     => $row['jeniskelamin'] ?? null,
             'tempat_lahir'     => $row['tempat_lahir'] ?? null,
-            'tgl_lahir'        => $row['tgl_lahir'] ?? null,
+            // 'tgl_lahir'        => $row['tgl_lahir'] ?? null,
+            'tgl_lahir'        => $this->parseDate($row['tgl_lahir'] ?? null),
             'kelas'            => $row['kelas'] ?? null,
             'program'          => $row['program'] ?? null,
             'anak_ke'          => $row['anak_ke'] ?? null,
@@ -52,5 +55,21 @@ class AlumniImport implements ToModel, WithHeadingRow
             'no_kks'           => $row['no_kks'] ?? null,
             'no_pkh'           => $row['no_pkh'] ?? null,
         ]);
+    }
+    private function parseDate($value)
+    {
+        if (empty($value)) return null;
+
+        try {
+            if (is_numeric($value)) {
+                return Carbon::instance(Date::excelToDateTimeObject($value))->format('Y-m-d');
+            }
+            if (preg_match('/^\d{2}-\d{2}-\d{4}$/', $value)) {
+                return Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
+            }
+            return Carbon::parse($value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }
