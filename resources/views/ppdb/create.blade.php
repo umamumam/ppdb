@@ -497,7 +497,7 @@
                 document.getElementById('nik_siswa').value = data.nik_siswa || '';
                 document.getElementById('jeniskelamin').value = data.jeniskelamin || '';
                 document.getElementById('tempat_lahir').value = data.tempat_lahir || '';
-                document.getElementById('tgl_lahir').value = data.tgl_lahir || '';
+                document.getElementById('tgl_lahir').value = data.tgl_lahir ? data.tgl_lahir.split('T')[0] : '';
                 document.getElementById('anak_ke').value = data.anak_ke || '';
 
                 // Data Keluarga

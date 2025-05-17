@@ -58,8 +58,8 @@
                                 <th>NISN</th>
                                 <th>Nama</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Kelas</th>
-                                <th>Program</th>
+                                <th>Tempat</th>
+                                <th>Tgl. Lahir</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -92,8 +92,8 @@
                                         {{ $alumni->jeniskelamin }}
                                     </span>
                                 </td>
-                                <td>{{ $alumni->kelas }}</td>
-                                <td>{{ $alumni->program }}</td>
+                                <td>{{ $alumni->tempat_lahir }}</td>
+                                <td>{{ \Carbon\Carbon::parse($alumni->tgl_lahir)->format('d/m/Y') }}</td>
                                 <td>
                                     <div class="d-flex gap-1">
                                         {{-- <a href="{{ route('alumnis.show', $alumni->id) }}" class="btn btn-info btn-sm"
