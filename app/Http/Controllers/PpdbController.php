@@ -67,7 +67,7 @@ class PpdbController extends Controller
         ];
 
         $alumniRules = [
-            'nisn' => 'required|string|size:10|exists:alumnis,nisn',
+            'nisn' => 'required|string|max:10|exists:alumnis,nisn',
             'nama_siswa' => 'nullable|string|max:100',
             'nis' => 'nullable|string|max:10',
             'nik_siswa' => 'nullable|string|max:16',

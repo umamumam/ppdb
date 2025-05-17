@@ -492,7 +492,7 @@
             .then(data => {
                 // Data Pribadi
                 document.getElementById('nama_siswa').value = data.nama_siswa || '';
-                document.getElementById('nis').value = data.nis || '';
+                // document.getElementById('nis').value = data.nis || '';
                 document.getElementById('nisn').value = data.nisn || '';
                 document.getElementById('nik_siswa').value = data.nik_siswa || '';
                 document.getElementById('jeniskelamin').value = data.jeniskelamin || '';
