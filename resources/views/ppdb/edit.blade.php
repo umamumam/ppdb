@@ -75,7 +75,8 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="{{ $ppdb->tgl_lahir }}">
+                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="{{ \Carbon\Carbon::parse($ppdb->tgl_lahir)->format('Y-m-d') }}">
+                        {{-- <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="{{ $ppdb->tgl_lahir }}"> --}}
                     </div>
                     <div class="col-md-4 mb-2">
                         <label for="hp_siswa">No. HP Siswa</label>
