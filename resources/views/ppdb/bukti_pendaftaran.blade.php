@@ -52,10 +52,10 @@
         .main-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px;
+            margin: 10px;
         }
 
-        .photo-cell {
+        /*.photo-cell {
             width: 120px;
             vertical-align: top;
         }
@@ -65,7 +65,7 @@
             height: 4cm;
             border: 1px solid #000;
             object-fit: cover;
-        }
+        }*/
 
         .info-cell {
             vertical-align: top;
@@ -156,17 +156,23 @@
                     @if($photoBase64)
                     <img src="{{ $photoBase64 }}" class="photo" alt="Foto Siswa" style="margin-left: 40px;">
                     @else
-                    <div class="photo">Foto</div>
+                    <div class="photo"></div>
                     @endif
                 </td>
-                <td>
-                    <img src="spmb.png" alt="SPMB" style="max-width: 150px; height: auto;">
-                </td>
-                <td style="vertical-align: top; padding-top: 5px;">
-                    <p style="margin-right: 150px; margin-top: 10px;">
+                <td style="vertical-align: top; padding-top: 10px;">
+                    <p style="margin-right: 10px; margin-top: 10px;">
                         Sirahan, {{ $tanggal }}
                         <br>Panitia SPMB
                     </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 45%;">
+                    MOTTO : <br>
+                    <i style="font-size: 14px;">"Teguh dalam Aqidah Cerdas dalam Perfikir <br> dan Peka Terhadap Perkembangan"</i>
+                </td>
+                <td>
+                    <img src="spmb.png" alt="SPMB" style="max-width: 200px; height: auto;">
                 </td>
             </tr>
         </table>
@@ -177,13 +183,18 @@
             <ol>
                 <li>
                     Pendaftar Peserta Baru harus datang tanggal 29 Juni s.d. 6 Juli ke madrasah
-                    untuk konfirmasi dan cetak kartu seleksi dengan membawa atau menunjukkan
+                    untuk konfirmasi dan cetak kartu seleksi dengan membawa & menunjukkan
                     bukti pendaftaran ini.
                 </li>
                 <li>
                     Pendaftar Naik Tingkat harus datang tanggal 9 Juli ke madrasah untuk
-                    konfirmasi dan melihat pengumuman dengan membawa atau menunjukkan
+                    konfirmasi dan melihat pengumuman dengan membawa & menunjukkan
                     bukti pendaftaran ini.
+                </li>
+                <li>
+                    Pendaftar mengumpulkan berkas meliputi : FC KK, FC Akte, SKL/Ijasah SMP/MTs, FC Raport
+                    Kelas 7 s.d Kelas 9, FC Sertifikat ABM jika ada, FC Kartu PIP Jika ada, FC Syahadah
+                    (Khusus dari MTs Darul Falah).
                 </li>
             </ol>
             <p>Contact Person: 085728129782 a.n. Muhammad Aziz, M.Pd.</p>
