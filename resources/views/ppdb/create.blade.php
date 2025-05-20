@@ -201,11 +201,19 @@
                         </div> --}}
                         <div class="col-md-6 mb-2">
                             <label for="nisn" class="form-label">NISN</label>
-                            <input type="text" class="form-control" id="nisn" name="nisn">
+                            <input type="text" class="form-control" id="nisn" name="nisn" maxlength="10"
+                                oninput="validateNISN()">
+                            <div class="invalid-feedback">
+                                NISN harus terdiri dari 10 karakter.
+                            </div>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="nik_siswa" class="form-label">NIK Siswa</label>
-                            <input type="text" class="form-control" id="nik_siswa" name="nik_siswa">
+                            <input type="text" class="form-control" id="nik_siswa" name="nik_siswa" maxlength="16"
+                                oninput="validateNIK()">
+                            <div class="invalid-feedback">
+                                NIK harus terdiri dari 16 karakter.
+                            </div>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label for="nama_siswa" class="form-label">Nama Lengkap</label>
@@ -283,7 +291,11 @@
                         <h6>Data Ayah</h6>
                         <div class="col-md-6 mb-2">
                             <label for="nik_ayah">NIK Ayah</label>
-                            <input type="text" name="nik_ayah" id="nik_ayah" class="form-control">
+                            <input type="text" name="nik_ayah" id="nik_ayah" class="form-control" maxlength="16"
+                                oninput="validateNIKAyah()">
+                            <div class="invalid-feedback">
+                                NIK Ayah harus terdiri dari 16 karakter.
+                            </div>
                         </div>
 
                         <div class="col-md-6 mb-2">
@@ -313,7 +325,11 @@
                         <h6>Data Ibu</h6>
                         <div class="col-md-6 mb-2">
                             <label for="nik_ibu">NIK Ibu</label>
-                            <input type="text" name="nik_ibu" id="nik_ibu" class="form-control">
+                            <input type="text" name="nik_ibu" id="nik_ibu" class="form-control" maxlength="16"
+                                oninput="validateNIKIbu()">
+                            <div class="invalid-feedback">
+                                NIK Ibu harus terdiri dari 16 karakter.
+                            </div>
                         </div>
 
                         <div class="col-md-6 mb-2">
@@ -536,5 +552,39 @@
                 alert(error.message);
             });
     });
+</script>
+<script>
+    function validateNISN() {
+        const nisnInput = document.getElementById('nisn');
+        if (nisnInput.value.length === 10) {
+            nisnInput.classList.remove('is-invalid');
+        } else {
+            nisnInput.classList.add('is-invalid');
+            }
+        }
+    function validateNIK() {
+        const nikInput = document.getElementById('nik_siswa');
+        if (nikInput.value.length === 16) {
+            nikInput.classList.remove('is-invalid');
+        } else {
+            nikInput.classList.add('is-invalid');
+            }
+        }
+    function validateNIKAyah() {
+        const nikAyahInput = document.getElementById('nik_ayah');
+        if (nikAyahInput.value.length === 16) {
+            nikAyahInput.classList.remove('is-invalid');
+        } else {
+            nikAyahInput.classList.add('is-invalid');
+        }
+    }
+    function validateNIKIbu() {
+        const nikIbuInput = document.getElementById('nik_ibu');
+        if (nikIbuInput.value.length === 16) {
+            nikIbuInput.classList.remove('is-invalid');
+        } else {
+            nikIbuInput.classList.add('is-invalid');
+        }
+    }
 </script>
 @endsection
