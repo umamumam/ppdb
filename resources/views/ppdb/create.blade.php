@@ -518,8 +518,8 @@
                 document.getElementById('hp_siswa').value = data.hp_siswa || '';
 
                 // Data Sekolah
-                document.getElementById('kelas').value = data.kelas || '';
-                document.getElementById('program').value = data.program || '';
+                // document.getElementById('kelas').value = data.kelas || '';
+                // document.getElementById('program').value = data.program || '';
                 document.getElementById('asal_sekolah').value = data.asal_sekolah || '';
                 document.getElementById('npsn').value = data.npsn || '';
                 document.getElementById('nsm').value = data.nsm || '';
