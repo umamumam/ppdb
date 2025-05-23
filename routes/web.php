@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DokumenSiswaController;
 use App\Http\Controllers\TahunPelajaranController;
+use App\Http\Controllers\LaporanPembayaranController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,4 +68,8 @@ Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index
 Route::post('/petugas', [PetugasController::class, 'store'])->name('petugas.store');
 Route::put('/petugas/{id}', [PetugasController::class, 'update'])->name('petugas.update');
 Route::delete('/petugas/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
+Route::prefix('laporan')->group(function () {
+    Route::get('/pembayaran', [LaporanPembayaranController::class, 'index'])->name('laporan.pembayaran');
+    Route::get('/pembayaran/cetak', [LaporanPembayaranController::class, 'cetak'])->name('laporan.pembayaran.cetak');
+});
 require __DIR__.'/auth.php';

@@ -17,6 +17,7 @@
                             <th>Jenis Pembayaran</th>
                             <th>Nominal</th>
                             <th>Status</th>
+                            <th>Petugas</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -48,6 +49,7 @@
                                     {{ $pembayaran->status }}
                                 </span>
                             </td>
+                            <td>{{ $pembayaran->petugas->nama }}</td>
                             <td>
                                 <a href="{{ route('pembayaran.edit', [$ppdb->id, $pembayaran->id]) }}"
                                     class="btn btn-sm btn-warning">

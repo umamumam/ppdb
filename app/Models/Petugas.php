@@ -17,4 +17,8 @@ class Petugas extends Model
     {
         return $this->hasMany(Ppdb::class);
     }
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class);
+    }
 }

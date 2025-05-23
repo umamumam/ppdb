@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Ppdb;
+use App\Models\Petugas;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -15,7 +16,7 @@ class PembayaranController extends Controller
     {
         $ppdb = Ppdb::with(['pembayarans' => function ($query) {
             $query->orderBy('tgl_bayar', 'desc');
-        }])->findOrFail($ppdb_id);
+        }, 'pembayarans.petugas'])->findOrFail($ppdb_id);
 
         return view('pembayaran.index', compact('ppdb'));
     }
@@ -24,7 +25,8 @@ class PembayaranController extends Controller
     public function create($ppdb_id)
     {
         $ppdb = Ppdb::findOrFail($ppdb_id);
-        return view('pembayaran.create', compact('ppdb'));
+        $petugas = Petugas::all();
+        return view('pembayaran.create', compact('ppdb', 'petugas'));
     }
 
     // Menyimpan pembayaran baru
@@ -32,14 +34,16 @@ class PembayaranController extends Controller
     {
         $validated = $request->validate([
             'jenis_pembayaran' => 'required|array|min:1',
-            'jenis_pembayaran.*' => 'in:SPP,Infaq,Seragam,Kolektif',
+            'jenis_pembayaran.*' => 'in:SPP,Infaq,Seragam,Kitab,Kolektif',
             'nominal_spp' => 'nullable|required_if:jenis_pembayaran,SPP|numeric|min:1000',
             'nominal_infaq' => 'nullable|required_if:jenis_pembayaran,Infaq|numeric|min:1000',
             'nominal_seragam' => 'nullable|required_if:jenis_pembayaran,Seragam|numeric|min:1000',
+            'nominal_kitab' => 'nullable|required_if:jenis_pembayaran,Kitab|numeric|min:1000',
             'nominal_kolektif' => 'nullable|required_if:jenis_pembayaran,Kolektif|numeric|min:1000',
             'tgl_bayar' => 'required|date',
             'status' => 'required|in:Lunas,Belum Lunas',
-            'keterangan' => 'nullable|string|max:255'
+            'keterangan' => 'nullable|string|max:255',
+            'petugas_id' => 'nullable|exists:petugas,id'
         ]);
 
         // Calculate total nominal
@@ -51,10 +55,12 @@ class PembayaranController extends Controller
         // Create payment record
         Pembayaran::create([
             'ppdb_id' => $ppdb_id,
+            'petugas_id' => $request->petugas_id,
             'jenis_pembayaran' => implode(',', $request->jenis_pembayaran),
             'nominal_spp' => $request->nominal_spp,
             'nominal_infaq' => $request->nominal_infaq,
             'nominal_seragam' => $request->nominal_seragam,
+            'nominal_kitab' => $request->nominal_kitab,
             'nominal_kolektif' => $request->nominal_kolektif,
             'tgl_bayar' => $request->tgl_bayar,
             'status' => $request->status,
@@ -70,7 +76,8 @@ class PembayaranController extends Controller
     {
         $pembayaran = Pembayaran::where('ppdb_id', $ppdb_id)->findOrFail($pembayaran_id);
         $selectedJenis = explode(',', $pembayaran->jenis_pembayaran);
-        return view('pembayaran.edit', compact('pembayaran', 'ppdb_id', 'selectedJenis'));
+        $petugas = Petugas::all();
+        return view('pembayaran.edit', compact('pembayaran', 'ppdb_id', 'selectedJenis', 'petugas'));
     }
 
     // Update data pembayaran
@@ -78,14 +85,16 @@ class PembayaranController extends Controller
     {
         $validated = $request->validate([
             'jenis_pembayaran' => 'required|array|min:1',
-            'jenis_pembayaran.*' => 'in:SPP,Infaq,Seragam,Kolektif',
+            'jenis_pembayaran.*' => 'in:SPP,Infaq,Seragam,Kitab,Kolektif',
             'nominal_spp' => 'nullable|required_if:jenis_pembayaran,SPP|numeric|min:1000',
             'nominal_infaq' => 'nullable|required_if:jenis_pembayaran,Infaq|numeric|min:1000',
             'nominal_seragam' => 'nullable|required_if:jenis_pembayaran,Seragam|numeric|min:1000',
+            'nominal_kitab' => 'nullable|required_if:jenis_pembayaran,Kitab|numeric|min:1000',
             'nominal_kolektif' => 'nullable|required_if:jenis_pembayaran,Kolektif|numeric|min:1000',
             'tgl_bayar' => 'required|date',
             'status' => 'required|in:Lunas,Belum Lunas',
-            'keterangan' => 'nullable|string|max:255'
+            'keterangan' => 'nullable|string|max:255',
+            'petugas_id' => 'nullable|exists:petugas,id'
         ]);
 
         $pembayaran = Pembayaran::where('ppdb_id', $ppdb_id)
@@ -96,10 +105,12 @@ class PembayaranController extends Controller
             'nominal_spp' => $request->nominal_spp,
             'nominal_infaq' => $request->nominal_infaq,
             'nominal_seragam' => $request->nominal_seragam,
+            'nominal_kitab' => $request->nominal_kitab,
             'nominal_kolektif' => $request->nominal_kolektif,
             'tgl_bayar' => $request->tgl_bayar,
             'status' => $request->status,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
+            'petugas_id' => $request->petugas_id
         ]);
 
         return redirect()->route('pembayaran.index', $ppdb_id)
@@ -119,17 +130,18 @@ class PembayaranController extends Controller
     public function cetakKuitansi(Request $request, $ppdb_id, $pembayaran_id)
     {
         Carbon::setLocale('id');
-        $pembayaran = Pembayaran::with(['ppdb', 'ppdb.tahunPelajaran', 'ppdb.petugas'])
+        $pembayaran = Pembayaran::with(['ppdb', 'ppdb.tahunPelajaran', 'petugas'])
             ->where('ppdb_id', $ppdb_id)
             ->findOrFail($pembayaran_id);
         $jenis_pembayaran = [
             'Infaq' => $pembayaran->nominal_infaq,
             'Seragam' => $pembayaran->nominal_seragam,
             'Syahriyah' => $pembayaran->nominal_spp,
+            'Kitab' => $pembayaran->nominal_kitab,
             'Kolektif' => $pembayaran->nominal_kolektif
         ];
         $total = $pembayaran->nominal_spp + $pembayaran->nominal_infaq
-            + $pembayaran->nominal_seragam + $pembayaran->nominal_kolektif;
+            + $pembayaran->nominal_seragam + $pembayaran->nominal_kitab + $pembayaran->nominal_kolektif;
         $data = [
             'pembayaran' => $pembayaran,
             'jenis_pembayaran' => $jenis_pembayaran,
@@ -137,7 +149,7 @@ class PembayaranController extends Controller
             'tanggal' => now()->translatedFormat('d F Y H:i:s'),
             'kode_transaksi' => 'INV-' . str_pad($pembayaran->id, 5, '0', STR_PAD_LEFT),
             'tahun_pelajaran' => str_replace('/', '', $pembayaran->ppdb->tahunPelajaran->tahun),
-            'petugas' => $pembayaran->ppdb->petugas->nama
+            'petugas' => $pembayaran->petugas->nama ? $pembayaran->petugas->nama : 'Petugas Belum Dipilih'
         ];
         $pdf = Pdf::loadView('pembayaran.kuitansi', $data)
             ->setPaper('a4', 'portrait')

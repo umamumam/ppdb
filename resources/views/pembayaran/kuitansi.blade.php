@@ -169,7 +169,7 @@
                 <div class="besar">Rp {{ number_format($total, 0, ',', '.') }}</div>
                 <p style="text-align: right;">
                     Sirahan, {{ \Carbon\Carbon::parse($pembayaran->tgl_bayar)->format('d/m/Y') }}<br>
-                    Petugas,{{ $pembayaran->ppdb->petugas->nama }}
+                    Petugas,{{ $pembayaran->petugas->nama }}
                 </p>
                 <div class="footer">
                     <span>PPDB_MASDafa_{{ $pembayaran->ppdb->tahunPelajaran->tahun }}</span>

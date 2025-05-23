@@ -14,6 +14,22 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
+                    <label class="form-label">Petugas</label>
+                    <select name="petugas_id" class="form-control @error('petugas_id') is-invalid @enderror" required>
+                        <option value="">-- Pilih Petugas --</option>
+                        @foreach($petugas as $p)
+                            <option value="{{ $p->id }}"
+                                {{ $pembayaran->petugas_id == $p->id ? 'selected' : '' }}
+                                {{ old('petugas_id') == $p->id ? 'selected' : '' }}>
+                                {{ $p->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('petugas_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Jenis Pembayaran</label>
 
                     <div class="form-check mb-2">
@@ -47,6 +63,17 @@
                                placeholder="Nominal Seragam"
                                value="{{ $pembayaran->nominal_seragam }}"
                                {{ in_array('Seragam', $selectedJenis) ? '' : 'disabled' }}>
+                    </div>
+
+                    <div class="form-check mb-2">
+                        <input type="checkbox" name="jenis_pembayaran[]" value="Kitab"
+                               class="form-check-input jenis-checkbox" id="kitab"
+                               {{ in_array('Kitab', $selectedJenis) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="kitab">Seragam</label>
+                        <input type="number" name="nominal_kitab" class="form-control mt-1 nominal-input"
+                               placeholder="Nominal Kitab"
+                               value="{{ $pembayaran->nominal_kitab }}"
+                               {{ in_array('Kitab', $selectedJenis) ? '' : 'disabled' }}>
                     </div>
 
                     <div class="form-check mb-2">
