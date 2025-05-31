@@ -86,7 +86,7 @@ class LaporanPembayaranController extends Controller
         ];
 
         $pdf = Pdf::loadView('laporan.pembayaran.cetak', $data)
-            ->setPaper('a4', 'landscape');
+            ->setPaper([0, 0, 595.28, 935.43], 'landscape');
 
         return $pdf->stream('laporan-pembayaran.pdf');
     }
