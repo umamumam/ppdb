@@ -48,6 +48,7 @@
                         <a href="{{ route('laporan.pembayaran.cetak', request()->query()) }}" class="btn btn-success" target="_blank">
                             <i class="fas fa-file-pdf"></i> Cetak PDF
                         </a>
+                        <a href="{{ route('pembayaran.export.excel', request()->all()) }}" class="btn btn-warning">Export Excel</a>
                     </div>
                 </div>
             </form>

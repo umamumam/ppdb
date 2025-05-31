@@ -68,6 +68,7 @@ Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index
 Route::post('/petugas', [PetugasController::class, 'store'])->name('petugas.store');
 Route::put('/petugas/{id}', [PetugasController::class, 'update'])->name('petugas.update');
 Route::delete('/petugas/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
+Route::get('laporan/pembayaran/export-excel', [LaporanPembayaranController::class, 'exportExcel'])->name('pembayaran.export.excel');
 Route::prefix('laporan')->group(function () {
     Route::get('/pembayaran', [LaporanPembayaranController::class, 'index'])->name('laporan.pembayaran');
     Route::get('/pembayaran/cetak', [LaporanPembayaranController::class, 'cetak'])->name('laporan.pembayaran.cetak');
