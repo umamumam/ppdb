@@ -169,7 +169,7 @@
             <tr>
                 <td style="width: 45%;">
                     MOTTO : <br>
-                    <i style="font-size: 14px;">"Teguh dalam Aqidah Cerdas dalam Perfikir <br> dan Peka Terhadap Perkembangan"</i>
+                    <i style="font-size: 14px;">"Teguh dalam Aqidah Cerdas dalam Berfikir <br> dan Peka Terhadap Perkembangan"</i>
                 </td>
                 <td>
                     <img src="spmb.png" alt="SPMB" style="max-width: 200px; height: auto;">

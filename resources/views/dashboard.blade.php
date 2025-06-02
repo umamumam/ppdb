@@ -31,7 +31,7 @@
                         {{ $naikTingkat }}
                         <span class="badge bg-light-primary border border-primary"><i class="ti ti-school"></i></span>
                     </h3>
-                    <p class="mb-0 text-muted text-sm">Murid MTs Dafa yang melanjutkan</p>
+                    <p class="mb-0 text-muted text-sm">Murid Naik Tingkat 2025/2026</p>
                 </div>
             </div>
         </div>
@@ -43,18 +43,18 @@
                         {{ $pesertaBaru }}
                         <span class="badge bg-light-success border border-success"><i class="ti ti-users"></i></span>
                     </h3>
-                    <p class="mb-0 text-muted text-sm">Murid baru mendaftar tahun ini</p>
+                    <p class="mb-0 text-muted text-sm">Murid Baru 2025/2026 </p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="mb-2 f-w-400 text-muted">Total Alumni MTs Dafa</h6>
+                    <h6 class="mb-2 f-w-400 text-muted">Total Alumni</h6>
                     <h3 class="mb-3">{{ $totalAlumni }}
                         <span class="badge bg-light-warning border border-warning"><i
                                 class="ti ti-user-check"></i></span></h3>
-                    <p class="mb-0 text-muted text-sm">Total alumni MTs Dafa yang terdaftar</p>
+                    <p class="mb-0 text-muted text-sm">Alumni MTs Dafa 2024/2025</p>
                 </div>
             </div>
         </div>
@@ -67,16 +67,16 @@
                     <h3 class="mb-3">{{ $totalPetugas }}
                         <span class="badge bg-light-danger border border-danger"><i
                                 class="ti ti-users"></i></span></h3>
-                    <p class="mb-0 text-muted text-sm">Total petugas pendaftaran</p>
+                    <p class="mb-0 text-muted text-sm">Petugas Pendaftaran</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-12 col-xl-8">
-        <h5 class="mb-3">Grafik SPMB</h5>
+        <h5 class="mb-3">GRAFIK SPMB</h5>
         <div class="card">
             <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Statistik Pendaftar</h6>
+                <h6 class="mb-2 f-w-400 text-muted">Murid Baru</h6>
                 <div id="sales-report-chart1"></div>
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
@@ -141,7 +141,7 @@
                                 ]
                             }],
                             xaxis: {
-                                categories: ['Naik Tingkat', 'Murid Baru', 'Alumni MTs Dafa']
+                                categories: ['Naik Tingkat', 'Murid Baru', 'Alumni MTs Dafa 2024/2025']
                             },
                             tooltip: {
                                 y: {
@@ -191,12 +191,12 @@
         </div>
     </div> --}}
     <div class="col-md-12 col-xl-4">
-        <h5 class="mb-3">Statistik SPMB</h5>
+        <h5 class="mb-3">DIAGRAM SPMB</h5>
         <div class="card">
             <div class="card-body">
                 <h6 class="mb-2 f-w-400 text-muted">Total Pendaftar</h6>
                 <h3 class="mb-3">{{ $totalPendaftar }} Orang</h3>
-                <h6 class="mb-2 f-w-400 text-muted">Total Calon Siswa</h6>
+                <h6 class="mb-2 f-w-400 text-muted">Total Alumni MTs Dafa 2024/2025</h6>
                 <h3 class="mb-3">{{ $totalAlumni }} Orang</h3>
                 <div id="income-overview-chart1"></div>
 

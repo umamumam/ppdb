@@ -98,8 +98,8 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Status</label>
                         <select name="status" class="form-control" required>
-                            <option value="Belum Lunas" {{ $pembayaran->status == 'Belum Lunas' ? 'selected' : '' }}>Belum Lunas</option>
-                            <option value="Lunas" {{ $pembayaran->status == 'Lunas' ? 'selected' : '' }}>Lunas</option>
+                            <option value="Cash" {{ $pembayaran->status == 'Cash' ? 'selected' : '' }}>Cash</option>
+                            <option value="Transfer" {{ $pembayaran->status == 'Transfer' ? 'selected' : '' }}>Transfer</option>
                         </select>
                     </div>
                 </div>

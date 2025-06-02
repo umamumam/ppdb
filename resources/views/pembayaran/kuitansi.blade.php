@@ -12,7 +12,7 @@
 
         body {
             font-family: "Courier New", monospace;
-            font-size: 12pt;
+            font-size: 9pt;
             margin: 0;
             padding: 0;
         }
@@ -23,6 +23,7 @@
             letter-spacing: 3px;
             margin-top: 0;
             white-space: nowrap;
+            font-size: 12pt;
         }
 
         .row {
@@ -38,7 +39,7 @@
         }
 
         .besar {
-            font-size: 16pt;
+            font-size: 14pt;
             font-weight: bold;
             padding: 10px;
             background: repeating-linear-gradient(-45deg,
@@ -56,12 +57,12 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
-            font-size: 10pt;
+            font-size: 6pt;
         }
 
         .cut {
             font-style: italic;
-            font-size: 9pt;
+            font-size: 6pt;
             text-align: left;
             margin-top: 10px;
         }
@@ -103,20 +104,22 @@
             <td class="left-column">
                 <div class="row"><span>{{ $pembayaran->ppdb->no_pendaftaran }}</span></div>
                 <br>
-                <strong>{{ $pembayaran->ppdb->nama_siswa }}</strong>
-                <p><u>Jumlah Bayar</u></p>
+                <strong>{{ $pembayaran->ppdb->nama_siswa }}</strong><br>
+                <br>Jenis Bayar</br>
                 {{--
                 <pre>1. Ifq.   300.000
 2. Srg.   200.000
 3. Syah.  130.000
-4. Kol.         0</pre> --}}
-                <div style="font-family: monospace; font-size: 10pt; line-height: 1.5; margin: 2px 0;">
+4. ktb.
+5. Kol.         0</pre> --}}
+                <div style="font-family: monospace; font-size: 9t; line-height: 1,5; margin: 2px 0;">
                     @php
                     $payments = [
-                    'Ifq.' => $pembayaran->nominal_infaq,
-                    'Srg.' => $pembayaran->nominal_seragam,
-                    'Syah.' => $pembayaran->nominal_spp,
-                    'Kol.' => $pembayaran->nominal_kolektif
+                    'Infaq' => $pembayaran->nominal_infaq,
+                    'Seragam' => $pembayaran->nominal_seragam,
+                    'Syahriyah' => $pembayaran->nominal_spp,
+                    'kitab' => $pembayaran->nominal_kitab,
+                    'Kolektif' => $pembayaran->nominal_kolektif
                     ];
                     @endphp
 
@@ -127,22 +130,24 @@
                     </div>
                     @endforeach
                 </div>
+                <p>Ket. :{{ $pembayaran->keterangan }}</p>
 
                 <p><strong>Total bayar</strong></p>
                 <div class="total-box">Rp {{ number_format($total, 0, ',', '.') }}</div>
                 <p style="text-align: center">Sirahan, {{ \Carbon\Carbon::parse($pembayaran->tgl_bayar)->format('d/m/Y')
-                    }}</p><br>
-                <span style="font-size: 10pt;">{{ $tanggal }}</span>
+                    }}<br>{{ $pembayaran->petugas->nama }}</p>
+                <span style="font-size: 6pt;">{{ $tanggal }}</span>
             </td>
 
             <!-- KOLOM KANAN -->
             <td class="right-column">
-                <div class="judul">KUITANSI</div>
                 <br>
-                <span>Nomor : {{ $pembayaran->ppdb->no_pendaftaran }}</span><br>
-                <span>Nama Peserta : {{ $pembayaran->ppdb->nama_siswa }}</span><br>
-                <span>Alamat :{{ $pembayaran->ppdb->alamat }}</span><br>
-                <span>Guna Membayar:</span><br>
+                <div class="judul">K U I T A N S I</div>
+                <br>
+                <span>Nomor : <i>{{ $pembayaran->ppdb->no_pendaftaran }}</i></span><br><br>
+                <span>Nama Peserta : <strong><i>{{ $pembayaran->ppdb->nama_siswa }}</i></strong></span><br>
+                <span>Alamat :<i>{{ $pembayaran->ppdb->alamat }}</i></span><br><br>
+                <span>Guna Membayar:</span><i>{{ $pembayaran->keterangan }}</i>
                 {{--
                 <pre>
   1. Infaq         Rp300.000
@@ -152,24 +157,26 @@
                 </pre> --}}
                 <br>
                 <div style="margin-left: 20px; width: 100%;">
-                    <table style="width: 100%; border-collapse: collapse; line-height: 1.3;">
+                    <table style="width: 100%; border-collapse: collapse; line-height: 1.2;">
                         @foreach($jenis_pembayaran as $jenis => $nominal)
                         <tr style="margin: 0; padding: 0;">
-                            <td style="width: 20%; padding: 0; margin: 0; vertical-align: top;">
+                            <!-- <td style="width: 20%; padding: 0; margin: 0; vertical-align: top;">
                                 {{ $loop->iteration }}. {{ $jenis }}
                             </td>
                             <td style="width: 40%; text-align: left; padding: 0; margin: 0; vertical-align: top;">
                                 Rp{{ number_format($nominal, 0, ',', '.') }}
-                            </td>
+                            </td> -->
                         </tr>
                         @endforeach
                     </table>
                 </div>
-                <br>
+
+                <p><strong>Total bayar</strong></p>
                 <div class="besar">Rp {{ number_format($total, 0, ',', '.') }}</div>
                 <p style="text-align: right;">
                     Sirahan, {{ \Carbon\Carbon::parse($pembayaran->tgl_bayar)->format('d/m/Y') }}<br>
-                    Petugas,{{ $pembayaran->petugas->nama }}
+                    Petugas, <br>
+                    {{ $pembayaran->petugas->nama }}
                 </p>
                 <div class="footer">
                     <span>PPDB_MASDafa_{{ $pembayaran->ppdb->tahunPelajaran->tahun }}</span>

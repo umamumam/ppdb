@@ -89,8 +89,8 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Status</label>
                         <select name="status" class="form-control" required>
-                            <option value="Belum Lunas" selected>Belum Lunas</option>
-                            <option value="Lunas">Lunas</option>
+                            <option value="Cash" selected>Cash</option>
+                            <option value="Transfer">Transfer</option>
                         </select>
                     </div>
                 </div>

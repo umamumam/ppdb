@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('nominal_kitab', 12, 2)->nullable();
             $table->decimal('nominal_kolektif', 12, 2)->nullable();
             $table->date('tgl_bayar');
-            $table->enum('status', ['Lunas', 'Belum Lunas'])->default('Belum Lunas');
+            $table->enum('status', ['Cash', 'Transfer'])->default('Cash');
             $table->text('keterangan')->nullable();
             $table->timestamps();
 

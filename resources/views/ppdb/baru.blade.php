@@ -108,7 +108,7 @@
             </tr>
             <tr>
                 <td>2.</td>
-                <td>Nama Siswa</td>
+                <td>Nama Murid</td>
                 <td>:</td>
                 <td>{{ $ppdb->nama_siswa }}</td>
             </tr>
@@ -116,7 +116,7 @@
                 <td>3.</td>
                 <td>NISN</td>
                 <td>:</td>
-                <td>{{ $ppdb->nis }}</td>
+                <td>{{ $ppdb->nisn }}</td>
             </tr>
             <tr>
                 <td>4.</td>
@@ -244,25 +244,30 @@
                     @endif
                 </td>
                 <td width="33%">
-                    Orang Tua / Wali<br><br><br><br><br>
-                    ..............................
+
+
                 </td>
                 <td width="33%">
-                    Peserta Didik Baru<br><br><br><br><br>
-                    ..............................
+                    Murid Baru<br><br><br><br><br>
+                    {{ $ppdb->nama_siswa }}
                 </td>
             </tr>
         </table>
         <div class="page-break"></div>
-        <h3 class="text-center mb-4">SURAT PERNYATAAN PESERTA DIDIK BARU <br>
-            TAHUN PELAJARAN 2023/2024</h3>
+        <h3 class="text-center mb-4">SURAT PERNYATAAN MURID BARU <br>
+            TAHUN PELAJARAN 2025/2026</h3>
         <div class="mt-5" style="font-size: 16px;">
             <p>Yang bertanda tangan di bawah ini, saya :</p>
             <table style="margin-left: 30px;">
                 <tr>
-                    <td width="25%">Nama Siswa</td>
+                    <td width="25%">Nama Murid</td>
                     <td width="2%">:</td>
                     <td>{{ $ppdb->nama_siswa }}</td>
+                <tr>
+                <tr>
+                    <td>NISN</td>
+                    <td>:</td>
+                    <td>{{ $ppdb->nisn }}</td>
                 </tr>
                 <tr>
                     <td>Jenis Kelamin</td>
@@ -276,7 +281,7 @@
                         Y') }}</td>
                 </tr>
                 <tr>
-                    <td>Alamat siswa</td>
+                    <td>Alamat Murid</td>
                     <td>:</td>
                     <td>{{ $ppdb->alamat }}</td>
                 </tr>
@@ -296,14 +301,14 @@
             </table>
             <p>Menyatakan dengan sesungguhnya, bahwa saya :</p>
             <ol style="text-align: justify">
-                <li>Berniat menuntut ilmu di Perguruan Islam Darul Falah Sirahan ini hanya semata-mata karena Allah SWT.
-                </li>
+                <li>Berniat menuntut ilmu di MA Darul Falah Sirahan ini hanya semata-mata karena Allah SWT.</li>
+                <li>Menerima segala bentuk keputusan hasil test kompetensi seleksi masuk dari Panitia Penerimaan Murid Baru.</li>
                 <li>Bersedia untuk mentaati segala peraturan yang berlaku di Madrasah Darul Falah Sirahan.</li>
-                <li>Bersedia menerima segala bentuk sanksi jika suatu saat saya melanggar aturan yang sudah ditetapkan
-                    oleh madrasah.</li>
+                <li>Bersedia menerima segala bentuk sanksi jika suatu saat saya melanggar aturan yang sudah ditetapkan oleh madrasah.
+                    Pelanggaran tersebut meliputi Pelanggaran Kelompok A, Pelanggaran Kelompok B dan Pelanggaran Kelompok C, jenis sanksi
+                    tersebut mulai dari peneguran, pernyataan, skores dan di kembalikan ke orang tua.</li>
                 <li>Bersedia membayar segala bentuk kontribusi/iuran yang telah ditentukan oleh pihak madrasah.</li>
-                <li>Menerima segala bentuk keputusan hasil tes seleksi masuk dari Panitia Penerimaan Siswa Baru.</li>
-                <li>Bersedia menjaga nama baik dan menjalin hubungan kerjasama yang baik dengan pihak Madrasah.</li>
+                <li>Bersedia menjaga nama baik Institusi di dalam maupun di luar madrasah dan bersedia menjalin hubungan kerjasama yang baik dengan pihak Madrasah.</li>
             </ol>
             <p>Demikian surat pernyataan ini untuk dapat dipergunakan sebagaimana mestinya.</p>
             <table style="width: 100%; text-align: center; margin-top: 40px;">
@@ -320,7 +325,7 @@
                     <td style="text-align: right" width="33%">
                         @if($materaiBase64)
                         <img src="{{ $materaiBase64 }}"
-                            style="width: 100px; height: 60px; display: inline-block; vertical-align: top; margin-top: 10px; margin-left: 10px;">
+                            style="width: 110px; height: 80px; display: inline-block; vertical-align: top; margin-top: 10px; margin-left: 10px;">
                         @else
                         <div style="width: 100px; height: 60px; border: 2px solid rgb(210, 210, 210);
                                 background-color: rgba(255, 255, 255, 0.2); display: inline-block;
@@ -331,7 +336,7 @@
                     </td>
                     <td width="33%">
                         Yang membuat pernyataan<br><br><br><br><br>
-                        ..............................
+                        {{ $ppdb->nama_siswa }}.
                     </td>
                 </tr>
             </table>

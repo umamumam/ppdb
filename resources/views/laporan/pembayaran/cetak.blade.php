@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="header">
-        <h2>LAPORAN PEMBAYARAN MA DARUL FALAH</h2>
+        <h2>LAPORAN PEMBAYARAN SPMB MA DARUL FALAH</h2>
         <p>Periode: {{ \Carbon\Carbon::parse($startDate)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($endDate)->format('d/m/Y') }}</p>
     </div>
 
@@ -29,7 +29,7 @@
                 <th>No</th>
                 <th>Tanggal</th>
                 <th>Siswa</th>
-                <th>Jenis Pembayaran</th>
+                <th>Ket</th>
                 <th>SPP</th>
                 <th>Infaq</th>
                 <th>Seragam</th>

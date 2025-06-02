@@ -45,7 +45,7 @@
                                 @endif
                             </td>
                             <td>
-                                <span class="badge bg-{{ $pembayaran->status == 'Lunas' ? 'success' : 'warning' }}">
+                                <span class="badge bg-{{ $pembayaran->status == 'Cash' ? 'success' : 'warning' }}">
                                     {{ $pembayaran->status }}
                                 </span>
                             </td>

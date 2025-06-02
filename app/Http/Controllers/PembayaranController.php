@@ -41,7 +41,7 @@ class PembayaranController extends Controller
             'nominal_kitab' => 'nullable|required_if:jenis_pembayaran,Kitab|numeric|min:1000',
             'nominal_kolektif' => 'nullable|required_if:jenis_pembayaran,Kolektif|numeric|min:1000',
             'tgl_bayar' => 'required|date',
-            'status' => 'required|in:Lunas,Belum Lunas',
+            'status' => 'required|in:Cash,Transfer',
             'keterangan' => 'nullable|string|max:255',
             'petugas_id' => 'nullable|exists:petugas,id'
         ]);
@@ -56,7 +56,8 @@ class PembayaranController extends Controller
         Pembayaran::create([
             'ppdb_id' => $ppdb_id,
             'petugas_id' => $request->petugas_id,
-            'jenis_pembayaran' => implode(',', $request->jenis_pembayaran),
+            'jenis_pembayaran' => implode(', ', array_map('trim', $request->jenis_pembayaran)),
+            // 'jenis_pembayaran' => implode(',', $request->jenis_pembayaran),
             'nominal_spp' => $request->nominal_spp,
             'nominal_infaq' => $request->nominal_infaq,
             'nominal_seragam' => $request->nominal_seragam,
@@ -92,7 +93,7 @@ class PembayaranController extends Controller
             'nominal_kitab' => 'nullable|required_if:jenis_pembayaran,Kitab|numeric|min:1000',
             'nominal_kolektif' => 'nullable|required_if:jenis_pembayaran,Kolektif|numeric|min:1000',
             'tgl_bayar' => 'required|date',
-            'status' => 'required|in:Lunas,Belum Lunas',
+            'status' => 'required|in:Cash,Transfer',
             'keterangan' => 'nullable|string|max:255',
             'petugas_id' => 'nullable|exists:petugas,id'
         ]);
