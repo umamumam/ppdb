@@ -132,7 +132,7 @@
                 </div>
                 <p>Ket. :{{ $pembayaran->keterangan }}</p>
 
-                <p><strong>Total bayar</strong></p>
+                <p><strong>Total Bayar {{ $pembayaran->status }}</strong></p>
                 <div class="total-box">Rp {{ number_format($total, 0, ',', '.') }}</div>
                 <p style="text-align: center">Sirahan, {{ \Carbon\Carbon::parse($pembayaran->tgl_bayar)->format('d/m/Y')
                     }}<br>{{ $pembayaran->petugas->nama }}</p>
@@ -145,7 +145,7 @@
                 <div class="judul">K U I T A N S I</div>
                 <br>
                 <span>Nomor : <i>{{ $pembayaran->ppdb->no_pendaftaran }}</i></span><br><br>
-                <span>Nama Peserta : <strong><i>{{ $pembayaran->ppdb->nama_siswa }}</i></strong></span><br>
+                <span>Nama Murid Baru : <strong><i>{{ $pembayaran->ppdb->nama_siswa }}</i></strong></span><br>
                 <span>Alamat :<i>{{ $pembayaran->ppdb->alamat }}</i></span><br><br>
                 <span>Guna Membayar:</span><i>{{ $pembayaran->keterangan }}</i>
                 {{--
@@ -171,7 +171,7 @@
                     </table>
                 </div>
 
-                <p><strong>Total bayar</strong></p>
+                <p><strong>Jumlah Bayar {{ $pembayaran->status }}</strong></p>
                 <div class="besar">Rp {{ number_format($total, 0, ',', '.') }}</div>
                 <p style="text-align: right;">
                     Sirahan, {{ \Carbon\Carbon::parse($pembayaran->tgl_bayar)->format('d/m/Y') }}<br>

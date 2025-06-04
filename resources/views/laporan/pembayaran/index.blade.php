@@ -62,16 +62,16 @@
                     <thead class="table-primary">
                         <tr>
                             <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Siswa</th>
-                            <th>Jenis Pembayaran</th>
-                            <th>SPP</th>
-                            <th>Infaq</th>
-                            <th>Seragam</th>
-                            <th>Kitab</th>
-                            <th>Kolektif</th>
-                            <th>Total</th>
-                            <th>Status</th>
+                            <th>Tgl. Transaksi</th>
+                            <th>Nama Murid Baru</th>
+                            <th>Uraian Transaksi</th>
+                            <th>Bayar Syahriyah</th>
+                            <th>Bayar Infaq</th>
+                            <th>Bayar Seragam</th>
+                            <th>Bayar Kitab</th>
+                            <th>Bayar Kolektif</th>
+                            <th>Total Bayar</th>
+                            <th>Status Bayar</th>
                             <th>Petugas</th>
                         </tr>
                     </thead>
@@ -86,7 +86,7 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $pembayaran->tgl_bayar->format('d/m/Y') }}</td>
                             <td>{{ $pembayaran->ppdb->nama_siswa }}</td>
-                            <td>{{ $pembayaran->jenis_pembayaran }}</td>
+                            <td>{{ $pembayaran->keterangan }}</td>
                             <td class="text-end">{{ number_format($pembayaran->nominal_spp, 0, ',', '.') }}</td>
                             <td class="text-end">{{ number_format($pembayaran->nominal_infaq, 0, ',', '.') }}</td>
                             <td class="text-end">{{ number_format($pembayaran->nominal_seragam, 0, ',', '.') }}</td>

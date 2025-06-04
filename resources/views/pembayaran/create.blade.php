@@ -17,7 +17,7 @@
 
         <div class="card mb-3">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Detail Pembayaran</h5>
+                <h5 class="mb-0">Detail Pembayaran</h5>{{ $ppdb->nama_siswa }}
             </div>
             <div class="card-body">
                 <!-- Tambahkan input petugas di sini -->
