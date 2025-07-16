@@ -163,7 +163,7 @@
                                 <ol>
                                     <li><strong>Nama Madrasah</strong>: MA Darul Falah</li>
                                     <li><strong>No. Statistik Madrasah</strong>: 131233180020</li>
-                                    <li><strong>Alamat</strong>: Jl. Raya Tayu-Jepara Km.17 Ds. Sirahan Kec. Cluwak Kab.
+                                    <li><strong>Alamat</strong>: Jl. Raya Tayu-Jepara Km.17 Ds. Sirahan Rt. 08/04 Kec. Cluwak Kab.
                                         Pati 59157</li>
                                     <li><strong>No. Telp./Fax</strong>: (0291) 4277748</li>
                                     <li><strong>Email</strong>: darulfalah_sirahan@yahoo.co.id</li>
@@ -250,7 +250,7 @@
         </div>
     </div>
 
-    <div id="services" class="services section">
+    <!-- <div id="services" class="services section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -508,10 +508,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
-    <div id="free-quote" class="free-quote">
+    <!-- <div id="free-quote" class="free-quote">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 offset-lg-4">
@@ -546,7 +546,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     {{-- <div id="portfolio" class="our-portfolio section">
@@ -681,8 +681,8 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-                        <h6>Contact Us</h6>
-                        <h4>Get In Touch With Us <em>Now</em></h4>
+                        <h6>Hubungi Kami</h6>
+                        <h4>Mari Bergabung <em>Sekarang</em></h4>
                         <div class="line-dec"></div>
                     </div>
                 </div>
@@ -735,28 +735,28 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <fieldset>
-                                                <input type="name" name="name" id="name" placeholder="Name"
+                                                <input type="name" name="name" id="name" placeholder="Nama"
                                                     autocomplete="on" required>
                                             </fieldset>
                                             <fieldset>
                                                 <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*"
-                                                    placeholder="Your Email" required="">
+                                                    placeholder="Email Anda" required="">
                                             </fieldset>
                                             <fieldset>
-                                                <input type="subject" name="subject" id="subject" placeholder="Subject"
+                                                <input type="subject" name="subject" id="subject" placeholder="Tema"
                                                     autocomplete="on">
                                             </fieldset>
                                         </div>
                                         <div class="col-lg-6">
                                             <fieldset>
                                                 <textarea name="message" type="text" class="form-control" id="message"
-                                                    placeholder="Message" required=""></textarea>
+                                                    placeholder="Pesan" required=""></textarea>
                                             </fieldset>
                                         </div>
                                         <div class="col-lg-12">
                                             <fieldset>
-                                                <button type="submit" id="form-submit" class="main-button">Send Message
-                                                    Now</button>
+                                                <button type="submit" id="form-submit" class="main-button">Kirim Pesan Sekarang
+                                                    Sekarang</button>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -782,7 +782,7 @@
 
                 <!-- Kolom 2: Quick Links -->
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h4 style="border-bottom: 2px solid #2ecc71; padding-bottom: 10px;">Quick Links</h4>
+                    <h4 style="border-bottom: 2px solid #2ecc71; padding-bottom: 10px;">Info Links</h4>
                     <ul style="list-style: none; padding: 0; margin-top: 20px;">
                         <li><a href="#" style="color: #ffffff; text-decoration: none;">Info Kurikulum</a></li>
                         <li><a href="#" style="color: #ffffff; text-decoration: none;">Info Buku-Buku Umum</a></li>

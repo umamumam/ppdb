@@ -1,6 +1,6 @@
 @extends('layouts1.app')
 
-@section('title', 'Daftar Alumni')
+@section('title', 'Daftar Alumni MTs Dafa')
 
 @section('content')
 <div class="row">
@@ -8,11 +8,11 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h4 class="card-title mb-0">Daftar Alumni</h4>
+                    <h4 class="card-title mb-0">Daftar Alumni MTs Dafa</h4>
                     <div>
-                        <a href="{{ route('alumnis.create') }}" class="btn btn-primary me-2">
+                        <!-- <a href="{{ route('alumnis.create') }}" class="btn btn-primary me-2">
                             <i class="fas fa-plus"></i> Tambah Alumni
-                        </a>
+                        </a> -->
                         <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#importModal">
                             <i class="fas fa-file-import"></i> Import
                         </button>
