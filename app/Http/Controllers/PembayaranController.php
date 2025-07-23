@@ -76,7 +76,8 @@ class PembayaranController extends Controller
     public function edit($ppdb_id, $pembayaran_id)
     {
         $pembayaran = Pembayaran::where('ppdb_id', $ppdb_id)->findOrFail($pembayaran_id);
-        $selectedJenis = explode(',', $pembayaran->jenis_pembayaran);
+        $selectedJenis = array_map('trim', explode(',', $pembayaran->jenis_pembayaran));
+        // $selectedJenis = explode(',', $pembayaran->jenis_pembayaran);
         $petugas = Petugas::all();
         $ppdb = Ppdb::findOrFail($ppdb_id);
         return view('pembayaran.edit', compact('pembayaran', 'ppdb_id', 'selectedJenis', 'petugas'));
